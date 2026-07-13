@@ -21,6 +21,7 @@ não quatro empresas em operação.
 ```text
 .
 ├── .claude/launch.json              # servidor local configurado
+├── vercel.json                       # deploy estático no Vercel
 ├── extraido_290626/
 │   ├── site/                        # landing page estática atual
 │   ├── brand-assets-safe/           # gerado pelo construtor de ativos
@@ -49,6 +50,22 @@ http://127.0.0.1:3000/
 ```
 
 O arquivo `.claude/launch.json` executa esse mesmo comando.
+
+## Deploy no Vercel
+
+O repositório está preparado para importação direta, sem framework e sem etapa de
+build. O `vercel.json` publica `extraido_290626/site` como diretório de saída.
+
+1. Acesse <https://vercel.com/new>.
+2. Importe `lorencato23/azlo_site`.
+3. Em **Framework Preset**, escolha **Other** se o Vercel não detectar automaticamente.
+4. Mantenha **Root Directory** como `./` (a raiz do repositório).
+5. Não defina Build Command nem Output Directory manualmente; o `vercel.json` já
+   contém essas opções.
+6. Clique em **Deploy**.
+
+Depois do primeiro deploy de produção, use a URL final ou o domínio próprio para
+preencher a URL canônica, `og:url` e a URL absoluta de `og:image` no HTML.
 
 ## Testes
 

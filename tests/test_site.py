@@ -17,6 +17,7 @@ class SitePositioningTests(unittest.TestCase):
         self.assertIn("azlo education", html)
         self.assertIn("azlo science", html)
         self.assertIn("mailto:contato@azlo.com.br", html)
+        self.assertIn(">contato@azlo.com.br</a>", html)
 
         self.assertNotIn("score de aderência", html)
         self.assertNotIn(">84<", html)
@@ -36,11 +37,19 @@ class SitePositioningTests(unittest.TestCase):
 
     def test_mobile_menu_exposes_and_updates_accessible_state(self) -> None:
         html = (SITE_DIR / "index.html").read_text(encoding="utf-8")
+        css = (SITE_DIR / "styles.css").read_text(encoding="utf-8")
         script = (SITE_DIR / "script.js").read_text(encoding="utf-8")
 
         self.assertIn('aria-controls="navegacao-principal"', html)
         self.assertIn('"Fechar menu"', script)
         self.assertIn('event.key === "Escape"', script)
+        self.assertIn('classList.add("js-enabled")', script)
+        self.assertIn("html:not(.js-enabled) .site-header", css)
+        self.assertIn("html.js-enabled .site-header.nav-open .site-nav", css)
+        self.assertIn("justify-self: stretch;", css)
+        self.assertIn("navLinks[0]?.focus()", script)
+        self.assertIn("restoreFocus: event.detail === 0", script)
+        self.assertIn("requestAnimationFrame(() => menuButton.focus())", script)
 
 
 if __name__ == "__main__":

@@ -857,6 +857,12 @@ p {
   line-height: 1.58;
 }
 
+.form-note a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .disclaimer {
   color: #dce9f1;
   background: #02162d;
@@ -937,28 +943,52 @@ html.reveal-ready .reveal {
     justify-content: space-between;
   }
 
-  .site-nav,
   .header-action {
     display: none;
   }
 
-  .menu-button {
+  html:not(.js-enabled) .site-header {
+    position: static;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding-block: 10px;
+  }
+
+  html:not(.js-enabled) .site-nav {
+    justify-self: stretch;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  html:not(.js-enabled) .site-nav a {
+    justify-content: center;
+  }
+
+  html.js-enabled .site-nav {
+    display: none;
+  }
+
+  html.js-enabled .menu-button {
     display: inline-flex;
   }
 
-  .site-header.nav-open .site-nav {
+  html.js-enabled .site-header.nav-open .site-nav {
     position: absolute;
     top: calc(var(--header-height) + 8px);
     left: 18px;
     right: 18px;
+    justify-self: stretch;
     display: grid;
+    width: auto;
+    max-width: none;
     padding: 10px;
     border: 1px solid var(--line);
     background: #fff;
     box-shadow: 0 22px 60px rgba(5, 43, 87, 0.16);
   }
 
-  .site-header.nav-open .site-nav a {
+  html.js-enabled .site-header.nav-open .site-nav a {
     min-height: 52px;
   }
 

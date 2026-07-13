@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import base64
 import json
+import struct
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -61,14 +62,25 @@ MASTERS = (
 )
 
 
-def encode_png(path: Path) -> str:
+def read_validated_png(path: Path, expected_width: int, expected_height: int) -> bytes:
     if not path.is_file():
         raise FileNotFoundError(f"Master raster não encontrado: {path}")
-    return base64.b64encode(path.read_bytes()).decode("ascii")
+
+    png = path.read_bytes()
+    if len(png) < 24 or png[:8] != b"\x89PNG\r\n\x1a\n" or png[12:16] != b"IHDR":
+        raise ValueError(f"PNG inválido: {path}")
+
+    width, height = struct.unpack(">II", png[16:24])
+    if (width, height) != (expected_width, expected_height):
+        raise ValueError(
+            f"Dimensões inválidas em {path}: {width}x{height}; "
+            f"esperado {expected_width}x{expected_height}"
+        )
+    return png
 
 
-def build_svg(master: RasterMaster, source_path: Path) -> str:
-    encoded_png = encode_png(source_path)
+def build_svg(master: RasterMaster, png: bytes) -> str:
+    encoded_png = base64.b64encode(png).decode("ascii")
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {master.width} {master.height}" role="img" aria-labelledby="title desc">
   <title id="title">{master.description}</title>
   <desc id="desc">Fonte de verdade: logo raster aprovada. Contêiner SVG híbrido, sem redesenho automático.</desc>
@@ -79,13 +91,20 @@ def build_svg(master: RasterMaster, source_path: Path) -> str:
 
 
 def build_assets(asset_dir: Path, output_dir: Path) -> list[Path]:
+    validated_masters = [
+        (
+            master,
+            read_validated_png(asset_dir / master.source_name, master.width, master.height),
+        )
+        for master in MASTERS
+    ]
+
     output_dir.mkdir(parents=True, exist_ok=True)
     written: list[Path] = []
 
-    for master in MASTERS:
-        source_path = asset_dir / master.source_name
+    for master, png in validated_masters:
         output_path = output_dir / master.output_name
-        output_path.write_text(build_svg(master, source_path), encoding="utf-8", newline="\n")
+        output_path.write_text(build_svg(master, png), encoding="utf-8", newline="\n")
         written.append(output_path)
 
     manifest = {

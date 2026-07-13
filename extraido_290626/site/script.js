@@ -1,3 +1,5 @@
+document.documentElement.classList.add("js-enabled");
+
 const header = document.querySelector("[data-header]");
 const menuButton = document.querySelector("[data-menu-button]");
 const navLinks = [...document.querySelectorAll(".site-nav a")];
@@ -14,19 +16,23 @@ const setMenuState = (isOpen, { restoreFocus = false } = {}) => {
   menuButton.setAttribute("aria-expanded", String(isOpen));
   menuButton.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
 
-  if (restoreFocus) menuButton.focus();
+  if (restoreFocus) requestAnimationFrame(() => menuButton.focus());
 };
 
 syncHeaderState();
 window.addEventListener("scroll", syncHeaderState, { passive: true });
 
 if (menuButton && header) {
-  menuButton.addEventListener("click", () => {
-    setMenuState(!header.classList.contains("nav-open"));
+  menuButton.addEventListener("click", (event) => {
+    const isOpening = !header.classList.contains("nav-open");
+    setMenuState(isOpening);
+    if (isOpening && event.detail === 0) navLinks[0]?.focus();
   });
 
   navLinks.forEach((link) => {
-    link.addEventListener("click", () => setMenuState(false));
+    link.addEventListener("click", (event) => {
+      setMenuState(false, { restoreFocus: event.detail === 0 });
+    });
   });
 
   document.addEventListener("keydown", (event) => {

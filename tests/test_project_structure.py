@@ -32,6 +32,23 @@ class ProjectStructureTests(unittest.TestCase):
         self.assertTrue((font_dir / "fraunces-latin.woff2").is_file())
         self.assertTrue((font_dir / "hanken-grotesk-latin.woff2").is_file())
 
+    def test_vercel_deploys_the_existing_static_site_without_a_build_step(self) -> None:
+        config = json.loads((ROOT / "vercel.json").read_text(encoding="utf-8"))
+
+        self.assertIsNone(config["buildCommand"])
+        self.assertEqual(config["outputDirectory"], "extraido_290626/site")
+        self.assertTrue(config["cleanUrls"])
+        self.assertFalse(config["trailingSlash"])
+        self.assertTrue((ROOT / config["outputDirectory"] / "index.html").is_file())
+
+    def test_readme_explains_direct_vercel_import(self) -> None:
+        readme = (ROOT / "README.md").read_text(encoding="utf-8").lower()
+
+        self.assertIn("https://vercel.com/new", readme)
+        self.assertIn("lorencato23/azlo_site", readme)
+        self.assertIn("root directory", readme)
+        self.assertIn("extraido_290626/site", readme)
+
 
 if __name__ == "__main__":
     unittest.main()
