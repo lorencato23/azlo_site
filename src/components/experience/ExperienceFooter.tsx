@@ -11,6 +11,7 @@ export function ExperienceFooter() {
         <p>Alpha Zenith Life Optimization</p>
         <nav aria-label="Links do rodapé">
           <a href="#movimento">Em movimento</a>
+          <a href="#projetos">Projetos</a>
           <a href="#frentes">Frentes</a>
           <a href="#metodo">Método</a>
           <a href="#contato">Contato</a>

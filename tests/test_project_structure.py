@@ -52,6 +52,21 @@ class ProjectStructureTests(unittest.TestCase):
         self.assertNotIn("100vetorial", public_source)
         self.assertIn("azlo-symbol-real-white.png", public_source)
 
+    def test_selected_work_is_present_and_sanitized(self) -> None:
+        page = (ROOT / "src" / "app" / "page.tsx").read_text(encoding="utf-8")
+        showcase = (
+            ROOT / "src" / "components" / "experience" / "SelectedWork.tsx"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("<SelectedWork />", page)
+        self.assertIn("Individual Clinical Guide", showcase)
+        self.assertIn("Ankinator", showcase)
+        self.assertIn("Anki Analytics", showcase)
+        self.assertIn("DADOS DEMONSTRATIVOS", showcase)
+        self.assertIn("Preview anonimizado", showcase)
+        self.assertNotIn("Dra. Francine", showcase)
+        self.assertNotIn("guia provisorio francine", showcase.lower())
+
 
 if __name__ == "__main__":
     unittest.main()

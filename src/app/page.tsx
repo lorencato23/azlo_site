@@ -6,6 +6,7 @@ import { ExperienceNav } from "@/components/experience/ExperienceNav";
 import { InMotion } from "@/components/experience/InMotion";
 import { Principles } from "@/components/experience/Principles";
 import { Process } from "@/components/experience/Process";
+import { SelectedWork } from "@/components/experience/SelectedWork";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <main id="main">
         <ExperienceHero />
         <InMotion />
+        <SelectedWork />
         <Domains />
         <Process />
         <Principles />
