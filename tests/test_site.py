@@ -24,6 +24,16 @@ class SitePositioningTests(unittest.TestCase):
         self.assertNotIn("iniciar diagnóstico", html)
         self.assertNotIn("começar pelo diagnóstico", html)
 
+    def test_public_metadata_uses_the_live_vercel_url(self) -> None:
+        html = (SITE_DIR / "index.html").read_text(encoding="utf-8")
+
+        self.assertIn('<link rel="canonical" href="https://azlo-site.vercel.app/">', html)
+        self.assertIn('<meta property="og:url" content="https://azlo-site.vercel.app/">', html)
+        self.assertIn(
+            '<meta property="og:image" content="https://azlo-site.vercel.app/assets/azlo-logo-real.png">',
+            html,
+        )
+
     def test_content_remains_visible_if_external_javascript_fails(self) -> None:
         html = (SITE_DIR / "index.html").read_text(encoding="utf-8")
         css = (SITE_DIR / "styles.css").read_text(encoding="utf-8")
