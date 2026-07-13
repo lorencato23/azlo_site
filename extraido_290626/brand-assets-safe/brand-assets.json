@@ -1,0 +1,33 @@
+{
+  "brand": "AZLO",
+  "status": "approved-raster-in-hybrid-svg",
+  "source_of_truth": "extraido_290626/site/assets/*-real*.png",
+  "full_vector_status": "blocked-until-designer-approved-master",
+  "warning": "Os antigos arquivos *_100vetorial.svg não são fonte oficial: eles reinterpretam a geometria da marca.",
+  "assets": [
+    {
+      "source": "azlo-logo-real.png",
+      "output": "azlo-assinatura-aprovada-hibrida.svg",
+      "width": 976,
+      "height": 383
+    },
+    {
+      "source": "azlo-logo-real-white.png",
+      "output": "azlo-assinatura-negativa-aprovada-hibrida.svg",
+      "width": 976,
+      "height": 383
+    },
+    {
+      "source": "azlo-symbol-real.png",
+      "output": "azlo-simbolo-aprovado-hibrido.svg",
+      "width": 350,
+      "height": 355
+    },
+    {
+      "source": "azlo-symbol-real-white.png",
+      "output": "azlo-simbolo-negativo-aprovado-hibrido.svg",
+      "width": 350,
+      "height": 355
+    }
+  ]
+}

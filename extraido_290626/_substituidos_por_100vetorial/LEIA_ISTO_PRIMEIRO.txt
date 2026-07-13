@@ -1,0 +1,67 @@
+AZLO — NOTA DE ENTREGA: VETORIZAÇÃO DA WORDMARK E TAGLINE
+============================================================
+
+O QUE FOI FEITO
+----------------
+A wordmark "AZLO" e a tagline "ALPHA ZENITH LIFE OPTIMIZATION" foram
+reconstruídas do zero como vetores reais — paths extraídos diretamente de
+contornos de fonte (Sora Bold para a wordmark, Hanken Grotesk Medium para a
+tagline), não traçadas a partir do PNG antigo. Isso corrige os dois defeitos
+identificados na Especificação de Vetorização v1.0.
+
+VALIDAÇÃO CONTRA O CRITÉRIO DE ACEITE DA ESPECIFICAÇÃO
+--------------------------------------------------------
+Problema 1 — Tracking irregular na wordmark
+  Critério da especificação: variação máxima de ±1 ponto percentual entre gaps.
+  Medido nesta entrega: gaps de 20.39%, 20.07%, 20.72% da largura média de letra.
+  Variação real: 0.65 pontos percentuais.
+  RESULTADO: dentro do critério.
+
+Problema 2 — Baseline da tagline ("LIFE" desalinhado)
+  Critério da especificação: todas as palavras compartilhando uma única
+  linha de base, como um único objeto de texto.
+  Nesta entrega: a tagline inteira é literalmente um único objeto de texto
+  vetorial — não há "palavras soltas" para desalinhar. Confirmado visualmente
+  (ver azlo_assinatura_positiva_preview.png, zoom na tagline).
+  RESULTADO: resolvido por construção, não por ajuste manual.
+
+O QUE NÃO FOI RESOLVIDO NESTA RODADA
+--------------------------------------
+O SÍMBOLO (monograma A/Z, estrela-guia, arco) permanece como imagem raster
+(PNG) embutida dentro do SVG, não como vetor próprio. Isso estava fora do
+escopo desta correção — a especificação original já apontava que o símbolo
+estava visualmente correto e não precisava de redesenho, apenas a wordmark
+e a tagline precisavam de correção.
+
+Consequência prática:
+  - Versão POSITIVA: funciona perfeitamente (símbolo + wordmark + tagline,
+    fundo claro).
+  - Versão NEGATIVA: a wordmark e a tagline ficam brancas corretamente, mas
+    o símbolo (que é majoritariamente navy/teal) quase desaparece sobre
+    fundo escuro, porque nunca foi desenhado para esse uso.
+  - Versão MONOCROMÁTICA: a wordmark e a tagline ficam num único navy sólido
+    corretamente, mas o símbolo mantém seus gradientes coloridos originais —
+    por isso o arquivo está marcado "_PARCIAL".
+
+Se as versões negativa e monocromática completas forem necessárias (ex.:
+para uso em fundo escuro ou impressão P&B), o símbolo precisa ser vetorizado
+separadamente — desenhado em Figma/Illustrator a partir da anatomia já
+descrita no brand book (Ápice/Zenith, estrela interna, curva de trajetória,
+base em Z), não traçado do PNG.
+
+ARQUIVOS NESTA ENTREGA
+------------------------
+azlo_assinatura_positiva.svg       — uso recomendado, fundo claro.
+azlo_assinatura_negativa.svg       — usar com a ressalva acima sobre o símbolo.
+azlo_assinatura_monocromatica_PARCIAL.svg — usar com a ressalva acima.
+azlo_wordmark_isolada.svg          — apenas "AZLO", sem símbolo nem tagline,
+                                      para usos horizontais estreitos.
+*_preview.png                      — conferência visual rápida de cada versão,
+                                      sem precisar abrir em editor vetorial.
+
+PRÓXIMO PASSO RECOMENDADO
+----------------------------
+Vetorizar o símbolo como path nativo (não raster), o que permite:
+  1. Versões negativa e monocromática completas e corretas.
+  2. Editar cor, peso de traço e proporção sem depender de imagem externa.
+  3. Um arquivo .svg final 100% vetorial, sem nenhuma imagem embutida.

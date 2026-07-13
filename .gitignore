@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+
+# Auditorias locais
+.audit/
+lighthouse-*.json
+lighthouse-*.html
+lighthouse-*.png
+pa11y-*.json
+
+# Experimentos descartáveis na raiz
+experimental-*.svg
+
+# Dependências/builds futuros
+node_modules/
+dist/
+build/
+coverage/

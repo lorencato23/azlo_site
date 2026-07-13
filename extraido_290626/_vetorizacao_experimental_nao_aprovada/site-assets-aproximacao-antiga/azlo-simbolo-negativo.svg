@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1620 1660">
+
+  <rect width="1620" height="1660" fill="#052B57"/>
+  <!-- AZLO simbolo isolado 100% vetorial. -->
+  <g id="azlo-symbol-vector" transform="translate(60,60)" fill="#FFFFFF">
+    <path fill-rule="evenodd" d="
+      M750 0 L1500 925 L1260 860 L750 225 L240 860 L0 925 Z
+      M750 405 L1045 780 L890 755 L750 565 L610 755 L455 780 Z"/>
+    <path d="M455 1010 L910 1010 L360 1538 L1100 1538 L1258 1388 L710 1388 L1260 860 L935 810 Z"/>
+    <path d="
+      M-35 1095
+      C350 885 790 822 1186 880
+      C1308 898 1422 932 1515 980
+      L1515 1085
+      C1405 1028 1288 990 1163 969
+      C760 903 328 968 -35 1228 Z"/>
+    <path d="M750 424 L782 642 L924 675 L782 708 L750 926 L718 708 L576 675 L718 642 Z"/>
+  </g>
+</svg>
