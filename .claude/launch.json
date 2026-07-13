@@ -2,15 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "AZLO — site estático",
-      "runtimeExecutable": "python",
-      "runtimeArgs": [
-        "-m",
-        "http.server",
-        "3000",
-        "--directory",
-        "extraido_290626/site"
-      ],
+      "name": "AZLO — Next.js",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "-p", "3000"],
       "port": 3000
     }
   ]
