@@ -42,3 +42,4 @@ next-env.d.ts
 # Unapproved experiments
 experimental-*.svg
 /public/logos/*100vetorial.svg
+.env*

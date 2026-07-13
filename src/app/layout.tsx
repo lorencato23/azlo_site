@@ -14,7 +14,7 @@ const hanken = localFont({
   display: "swap",
 });
 
-const siteUrl = "https://azlo-site.vercel.app";
+const siteUrl = "https://azlo.com.br";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

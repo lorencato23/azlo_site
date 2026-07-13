@@ -24,15 +24,15 @@ class SitePositioningTests(unittest.TestCase):
         self.assertNotIn("iniciar diagnóstico", html)
         self.assertNotIn("começar pelo diagnóstico", html)
 
-    def test_public_metadata_uses_the_live_vercel_url(self) -> None:
-        html = (SITE_DIR / "index.html").read_text(encoding="utf-8")
+    def test_current_metadata_uses_the_custom_domain(self) -> None:
+        layout = (ROOT / "src" / "app" / "layout.tsx").read_text(encoding="utf-8")
+        robots = (ROOT / "public" / "robots.txt").read_text(encoding="utf-8")
+        sitemap = (ROOT / "public" / "sitemap.xml").read_text(encoding="utf-8")
 
-        self.assertIn('<link rel="canonical" href="https://azlo-site.vercel.app/">', html)
-        self.assertIn('<meta property="og:url" content="https://azlo-site.vercel.app/">', html)
-        self.assertIn(
-            '<meta property="og:image" content="https://azlo-site.vercel.app/assets/azlo-logo-real.png">',
-            html,
-        )
+        self.assertIn('const siteUrl = "https://azlo.com.br"', layout)
+        self.assertIn("https://azlo.com.br/sitemap.xml", robots)
+        self.assertIn("<loc>https://azlo.com.br/</loc>", sitemap)
+        self.assertNotIn("azlo-site.vercel.app", layout + robots + sitemap)
 
     def test_content_remains_visible_if_external_javascript_fails(self) -> None:
         html = (SITE_DIR / "index.html").read_text(encoding="utf-8")

@@ -41,6 +41,11 @@ class ProjectStructureTests(unittest.TestCase):
         self.assertEqual(vercel["framework"], "nextjs")
         self.assertNotIn("outputDirectory", vercel)
         self.assertTrue(vercel["headers"])
+        redirect = vercel["redirects"][0]
+        self.assertEqual(redirect["source"], "/:path*")
+        self.assertEqual(redirect["has"], [{"type": "host", "value": "www.azlo.com.br"}])
+        self.assertEqual(redirect["destination"], "https://azlo.com.br/:path*")
+        self.assertTrue(redirect["permanent"])
 
     def test_public_experience_does_not_reference_experimental_vectors(self) -> None:
         sources = [
