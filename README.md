@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AZLO
 
-## Getting Started
+Site institucional da AZLO: saúde, tecnologia, educação e ciência conectadas por clareza, critério e construção.
 
-First, run the development server:
+## Stack
+
+- Next.js 14 e React 18
+- TypeScript
+- Tailwind CSS
+- export estático para `out/`
+- Fraunces e Hanken Grotesk self-hosted
+
+## Desenvolvimento
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Verificação de produção:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run generate-assets
+npm run lint
+npx tsc --noEmit
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Estrutura
 
-## Learn More
+- `src/app/` — layout, metadata, fontes e estilos globais
+- `src/components/experience/` — experiência pública da homepage
+- `public/logos/` — assinaturas raster aprovadas
+- `scripts/generate-assets.mjs` — favicons e Open Graph derivados dos PNGs aprovados
 
-To learn more about Next.js, take a look at the following resources:
+## Integridade da marca
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Os arquivos `public/logos/azlo-*-real*.png` são a fonte visual aprovada. Reconstruções experimentais `*100vetorial.svg` não são assets oficiais, são ignoradas pelo Git e não devem ser publicadas como vetores da marca.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+O projeto usa `output: "export"` em `next.config.mjs`. A Vercel executa `npm run build` e publica a saída estática. Não há variáveis de ambiente obrigatórias nem analytics de terceiros.
