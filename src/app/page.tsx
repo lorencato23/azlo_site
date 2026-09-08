@@ -1,148 +1,89 @@
 import Link from "next/link";
 import { ArrowRightIcon, ArrowUpRightIcon, LayerIcon, MailIcon } from "@/components/site/Icons";
-import { ProjectCard } from "@/components/site/ProjectCard";
-import { SectionIntro } from "@/components/site/SectionIntro";
-import { ServiceCard } from "@/components/site/ServiceCard";
-import { TeamCard } from "@/components/site/TeamCard";
-import { principles, projects, services, site, team } from "@/data/site";
+import { currentTeam, featuredProjects, method, projects, site } from "@/data/site";
 
-const featuredProjects = projects.filter((project) => project.featured);
+const logosmed = projects.find((project) => project.slug === "logosmed");
+const supportingWork = featuredProjects.filter((project) => project.slug !== "logosmed");
 
 export default function Home() {
   return (
     <main id="main">
-      <section className="hero">
+      <section className="hero hero--refined">
         <div className="hero__grid" aria-hidden="true" />
         <div className="site-frame hero__layout">
           <div className="hero__copy">
-            <p className="eyebrow eyebrow--light"><span />AZLO · systems studio</p>
-            <h1>IA, infraestrutura e software <em>onde o trabalho acontece.</em></h1>
-            <p className="hero__lead">
-              Projetamos e integramos sistemas para organizações que precisam de tecnologia aplicada ao fluxo real, à infraestrutura disponível e à decisão humana.
-            </p>
+            <p className="eyebrow eyebrow--light"><span />AZLO · engenharia de sistemas</p>
+            <h1>IA, software e infraestrutura <em>para a operação real.</em></h1>
+            <p className="hero__lead">Entramos onde processo, dados e ambiente técnico precisam voltar a trabalhar juntos.</p>
             <div className="hero__actions">
-              <Link className="button button--primary" href="/servicos">Explorar serviços <ArrowRightIcon /></Link>
-              <Link className="button button--secondary" href="/projetos">Ver projetos selecionados</Link>
+              <Link className="button button--primary" href="#problemas">Ver problemas que abordamos <ArrowRightIcon /></Link>
+              <Link className="button button--secondary" href="#trabalho">Ver trabalho selecionado</Link>
             </div>
-            <dl className="hero__facts">
-              <div><dt>Escopo</dt><dd>IA · dados · automação</dd></div>
-              <div><dt>Ambiente</dt><dd>Cloud · VPS · infraestrutura privada</dd></div>
-              <div><dt>Princípio</dt><dd>Contexto antes de ferramenta</dd></div>
-            </dl>
+            <p className="hero__proof">Sistemas clínicos · IA aplicada · infraestrutura privada · automação</p>
           </div>
 
-          <div className="system-map" role="img" aria-label="Diagrama ilustrativo: fluxos de trabalho entram em uma camada de engenharia que integra sistemas, dados, infraestrutura e revisão humana.">
-            <div className="system-map__header"><span>AZLO / SYSTEM MAP</span><i>01</i></div>
-            <div className="system-map__canvas">
-              <div className="system-map__origin"><span>01</span><strong>Fluxo real</strong><small>Pessoas, rotinas e restrições</small></div>
-              <div className="system-map__origin"><span>02</span><strong>Dados e sistemas</strong><small>Fontes, integrações e contexto</small></div>
-              <div className="system-map__core"><LayerIcon /><strong>Engenharia aplicada</strong><small>IA · software · infraestrutura</small></div>
-              <div className="system-map__outcome"><span>03</span><strong>Operação mais clara</strong><small>Automação com revisão humana</small></div>
-              <svg className="system-map__paths" viewBox="0 0 600 420" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M100 110 C 230 110 200 180 300 210" />
-                <path d="M100 300 C 220 300 220 245 300 210" />
-                <path d="M345 210 C 435 210 425 210 510 210" />
-                <circle cx="300" cy="210" r="4" />
-                <circle cx="510" cy="210" r="4" />
+          <div className="topology" role="img" aria-label="Topologia AZLO: operação gera sinais; sinais ganham contexto; contexto orienta engenharia, ação e feedback.">
+            <div className="topology__header"><span>AZLO / OPERATION TOPOLOGY</span><i>01</i></div>
+            <div className="topology__canvas">
+              <div className="topology__node topology__node--operation"><b>01</b><strong>Operação</strong><small>pessoas, rotinas, restrições</small></div>
+              <div className="topology__node topology__node--signals"><b>02</b><strong>Sinais</strong><small>dados, falhas, atrito</small></div>
+              <div className="topology__node topology__node--context"><LayerIcon /><strong>Contexto</strong><small>fluxo, acesso, prioridade</small></div>
+              <div className="topology__node topology__node--action"><b>03</b><strong>Intervenção</strong><small>IA, software, infraestrutura</small></div>
+              <div className="topology__node topology__node--feedback"><b>04</b><strong>Feedback</strong><small>operação mais clara</small></div>
+              <svg className="topology__paths" viewBox="0 0 640 430" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M110 100 C190 100 190 145 285 165" />
+                <path d="M120 305 C205 305 210 250 285 225" />
+                <path d="M365 195 C430 195 438 150 520 128" />
+                <path d="M365 220 C445 240 440 300 525 310" />
+                <path className="topology__feedback-path" d="M520 330 C425 415 205 408 108 335" />
+                <circle cx="325" cy="195" r="5" />
               </svg>
             </div>
-            <div className="system-map__footer"><span><i /> Sinal técnico, não promessa genérica</span><span>AZLO 2026</span></div>
+            <div className="topology__footer"><span><i /> Contexto antes de ferramenta</span><span>ROUTING / DECISION / FEEDBACK</span></div>
           </div>
         </div>
       </section>
 
-      <section className="section section--paper" id="servicos">
+      <section className="section home-problems" id="problemas">
         <div className="site-frame">
-          <SectionIntro
-            eyebrow="Capacidades"
-            title={<>Engenharia que entra no sistema, <em>não fica na apresentação.</em></>}
-            text="A AZLO combina diagnóstico técnico, construção e integração. O ponto de partida é o problema operacional e o contexto de quem vai manter o sistema depois."
-          />
-          <div className="service-grid">
-            {services.map((service) => <ServiceCard key={service.index} service={service} />)}
-          </div>
-          <Link className="section-link" href="/servicos">Conhecer escopos de atuação <ArrowRightIcon /></Link>
-        </div>
-      </section>
-
-      <section className="section section--navy" id="projetos">
-        <div className="site-frame">
-          <SectionIntro
-            eyebrow="Projetos selecionados"
-            invert
-            title={<>Tecnologia em diferentes estágios. <em>Status explícito em cada caso.</em></>}
-            text="Produtos, contribuições técnicas e sistemas em evolução. Sem métricas inventadas, previews privados ou capacidades que ainda não foram verificadas."
-          />
-          <div className="project-grid project-grid--featured">
-            {featuredProjects.map((project) => <ProjectCard key={project.slug} project={project} compact />)}
-          </div>
-          <div className="project-cta-row">
-            <p>Veja o portfólio completo, os limites de cada iniciativa e os casos que podem ser descritos publicamente.</p>
-            <Link className="button button--outline-light" href="/projetos">Todos os projetos <ArrowRightIcon /></Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section methodology" id="metodo">
-        <div className="site-frame methodology__layout">
-          <div>
-            <p className="eyebrow"><span />Modo de trabalho</p>
-            <h2>O projeto avança quando a decisão deixa de ser abstrata.</h2>
-            <p className="methodology__lead">Uma sequência curta para reduzir ruído, preservar restrições e transformar um problema em sistema operável.</p>
-          </div>
-          <ol className="methodology__steps">
-            <li><span>01</span><div><h3>Ler o ambiente</h3><p>Mapear fluxo, infraestrutura, dados, dependências e pontos onde uma mudança pode criar mais atrito do que benefício.</p></div></li>
-            <li><span>02</span><div><h3>Desenhar a intervenção</h3><p>Definir o que será automatizado, o que precisa de integração e onde o controle humano permanece.</p></div></li>
-            <li><span>03</span><div><h3>Validar em operação</h3><p>Construir, observar, corrigir e documentar a passagem de uma solução possível para uma solução utilizável.</p></div></li>
+          <div className="home-problems__intro"><p className="eyebrow"><span />Onde entramos</p><h2>Quando a operação perde <em>continuidade.</em></h2><p>O ponto de partida é a fricção observável, não uma tecnologia escolhida antes do problema.</p></div>
+          <ol className="problem-list">
+            <li><span>01</span><div><h3>Sistemas difíceis de operar</h3><p>HIS, integrações e rotinas internas com retrabalho, dependências ou manutenção opaca.</p></div><Link href="/servicos">Sistemas & saúde <ArrowRightIcon /></Link></li>
+            <li><span>02</span><div><h3>Informação que não chega à decisão</h3><p>Conhecimento disperso, permissões frágeis e fluxos que precisam de contexto para usar IA.</p></div><Link href="/servicos">IA integrada <ArrowRightIcon /></Link></li>
+            <li><span>03</span><div><h3>Infraestrutura sem trilha clara</h3><p>Dados, serviços e automações que precisam ser observáveis e sustentáveis no ambiente real.</p></div><Link href="/servicos">Infraestrutura & dados <ArrowRightIcon /></Link></li>
           </ol>
         </div>
       </section>
 
-      <section className="section principles">
+      <section className="section section--navy home-work" id="trabalho">
         <div className="site-frame">
-          <SectionIntro
-            eyebrow="Critérios"
-            title={<>Sofisticação técnica só importa quando aumenta a <em>capacidade de operar.</em></>}
-            align="start"
-          />
-          <div className="principles-grid">
-            {principles.map((principle) => (
-              <article key={principle.number}>
-                <span>{principle.number}</span>
-                <h3>{principle.title}</h3>
-                <p>{principle.text}</p>
-              </article>
-            ))}
+          <div className="home-work__intro"><p className="eyebrow eyebrow--light"><span />Trabalho selecionado</p><h2>Prova técnica em <em>estágios visíveis.</em></h2><Link href="/projetos">Ver todos os projetos <ArrowRightIcon /></Link></div>
+          {logosmed ? <article className="logos-feature">
+            <div><p className="project-status project-status--light">{logosmed.status}</p><span className="logos-feature__meta">PRODUTO EDUCACIONAL · SAÚDE</span><h3>LogosMed</h3><p>{logosmed.summary}</p><a className="button button--primary" href={logosmed.externalUrl} target="_blank" rel="noreferrer">Conhecer LogosMed <ArrowUpRightIcon /></a></div>
+            <ol className="logos-feature__cycle"><li><b>01</b><span>Sessão</span></li><li><b>02</b><span>Feedback</span></li><li><b>03</b><span>Rating</span></li><li><b>04</b><span>Próxima questão</span></li></ol>
+          </article> : null}
+          <div className="work-index">
+            {supportingWork.map((project, index) => <article key={project.slug}><span>0{index + 2}</span><div><p className="project-status">{project.status}</p><h3>{project.title}</h3><p>{project.summary}</p></div><Link href={`/projetos/${project.slug}`} aria-label={`Ler caso ${project.title}`}><ArrowRightIcon /></Link></article>)}
           </div>
         </div>
       </section>
 
-      <section className="section team-section" id="time">
+      <section className="section home-method">
         <div className="site-frame">
-          <SectionIntro
-            eyebrow="Pessoas"
-            title={<>Uma equipe em construção, com <em>responsabilidades claras.</em></>}
-            text="Os três primeiros perfis representam a equipe atual. As três posições seguintes estão explicitamente sinalizadas como expansões em discussão."
-          />
-          <div className="team-grid">
-            {team.map((member) => <TeamCard key={`${member.name}-${member.role}`} member={member} />)}
-          </div>
+          <div className="home-method__intro"><p className="eyebrow"><span />Método</p><h2>Contexto antes de <em>ferramenta.</em></h2><p>Disciplina de engenharia para sair de uma hipótese e chegar a uma operação que pode ser mantida.</p></div>
+          <ol className="method-rail">{method.map((item) => <li key={item.number}><span>{item.number}</span><h3>{item.title}</h3><p>{item.text}</p></li>)}</ol>
+          <Link className="section-link" href="/sobre">Conhecer método e time <ArrowRightIcon /></Link>
         </div>
+      </section>
+
+      <section className="home-people">
+        <div className="site-frame home-people__layout"><p className="eyebrow"><span />Quem responde</p><div><h2>Engenharia conduzida por <em>pessoas próximas do problema.</em></h2><ul>{currentTeam.map((person) => <li key={person.name}><strong>{person.name}</strong><span>{person.role}</span></li>)}</ul></div><Link href="/sobre">Método & time <ArrowRightIcon /></Link></div>
       </section>
 
       <section className="contact-band" id="contato">
         <div className="site-frame contact-band__layout">
-          <div>
-            <p className="eyebrow eyebrow--light"><span />Contato</p>
-            <h2>Comece pelo problema que está travando a operação.</h2>
-          </div>
-          <div>
-            <p>Conte o contexto, o sistema envolvido e o tipo de resultado que precisa acontecer. A primeira conversa serve para entender escopo, não para vender uma solução pronta.</p>
-            <a className="contact-band__email" href={`mailto:${site.email}?subject=Conversa%20com%20a%20AZLO`}>
-              <MailIcon /><span>{site.email}</span><ArrowUpRightIcon />
-            </a>
-            <small>Não envie dados clínicos, credenciais ou informações pessoais sensíveis por e-mail.</small>
-          </div>
+          <div><p className="eyebrow eyebrow--light"><span />Contato</p><h2>Tem uma operação que precisa voltar a fluir?</h2></div>
+          <div><p>Descreva o sistema, a fricção e o resultado que precisa acontecer. A conversa começa pelo contexto técnico.</p><a className="contact-band__email" href={`mailto:${site.email}?subject=Conversa%20com%20a%20AZLO`}><MailIcon /><span>Conversar sobre um projeto</span><ArrowUpRightIcon /></a><small>Abre seu cliente de e-mail. Não envie dados clínicos identificáveis, credenciais ou tokens.</small></div>
         </div>
       </section>
     </main>

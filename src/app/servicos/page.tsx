@@ -7,8 +7,10 @@ import { services } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Serviços",
-  description: "Engenharia de sistemas clínicos, IA integrada, infraestrutura, dados e automação para fluxos reais.",
+  description: "Intervenções em sistemas clínicos, IA integrada, infraestrutura, dados e automação para operações reais.",
   alternates: { canonical: "/servicos" },
+  openGraph: { title: "Serviços | AZLO", description: "Intervenções em sistemas clínicos, IA integrada, infraestrutura, dados e automação para operações reais.", url: "/servicos" },
+  twitter: { card: "summary_large_image", title: "Serviços | AZLO", description: "Intervenções em sistemas clínicos, IA integrada, infraestrutura, dados e automação para operações reais." },
 };
 
 export default function ServicesPage() {
@@ -17,13 +19,14 @@ export default function ServicesPage() {
       <section className="page-hero page-hero--navy">
         <div className="site-frame">
           <p className="eyebrow eyebrow--light"><span />Serviços</p>
-          <h1>Capacidade técnica aplicada ao ambiente que já existe.</h1>
-          <p>Do HIS à infraestrutura privada, a AZLO entra no problema para entender dependências, integrar sistemas e deixar uma operação mais clara de manter.</p>
+          <h1>Problemas diferentes. Uma engenharia que começa pelo ambiente.</h1>
+          <p>Organizamos a atuação pelo que precisa mudar na operação — e usamos tecnologia como meio, não como produto isolado.</p>
+          <Link className="button button--primary page-hero__cta" href="/contato">Descrever um problema <ArrowRightIcon /></Link>
         </div>
       </section>
       <section className="section section--paper">
         <div className="site-frame">
-          <SectionIntro eyebrow="Escopo" title={<>Três frentes para transformar restrições em <em>arquitetura utilizável.</em></>} align="start" />
+          <SectionIntro eyebrow="Onde entramos" title={<>Quatro fricções, quatro formas de <em>intervir.</em></>} text="A conversa começa pelo fluxo, pela equipe e pelas restrições que tornam uma solução sustentável." align="start" />
           <div className="service-grid service-grid--page">
             {services.map((service) => <ServiceCard key={service.index} service={service} />)}
           </div>
@@ -31,13 +34,13 @@ export default function ServicesPage() {
       </section>
       <section className="section service-detail">
         <div className="site-frame service-detail__grid">
-          <div><p className="eyebrow"><span />Como a IA entra</p><h2>Não é uma camada genérica sobre o seu processo.</h2></div>
+          <div><p className="eyebrow"><span />Recursos técnicos</p><h2>A ferramenta entra depois da <em>pergunta certa.</em></h2></div>
           <div>
-            <p>Modelos, agentes, RAG, bancos vetoriais, APIs e pipelines só fazem sentido quando há uma decisão concreta sobre dados, permissões, infraestrutura e manutenção.</p>
+            <p>LLMs, agentes, RAG, bancos vetoriais, APIs, VPS e pipelines fazem parte do repertório. A escolha depende dos dados, permissões, infraestrutura e manutenção que o contexto suporta.</p>
             <ul>
-              <li>Integração de LLMs a workflows existentes</li>
-              <li>Implantação em VPS, servidores privados ou hardware do cliente</li>
-              <li>Automação desenhada com logs, limites e pontos de aprovação</li>
+              <li>Integração de IA a workflows existentes</li>
+              <li>Implantação em VPS, servidores privados ou hardware próprio</li>
+              <li>Automação com logs, limites e pontos de aprovação</li>
             </ul>
             <Link className="section-link" href="/contato">Discutir um contexto técnico <ArrowRightIcon /></Link>
           </div>

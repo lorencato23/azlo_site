@@ -19,21 +19,21 @@ const hanken = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: "AZLO | Engenharia para fluxos reais", template: "%s | AZLO" },
+  title: { default: "AZLO | Engenharia para operações reais", template: "%s | AZLO" },
   description: site.description,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: "AZLO | Engenharia para fluxos reais",
+    title: "AZLO | Engenharia para operações reais",
     description: site.description,
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "AZLO — engenharia para fluxos reais." }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "AZLO — engenharia para operações reais." }],
     locale: "pt_BR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AZLO | Engenharia para fluxos reais",
+    title: "AZLO | Engenharia para operações reais",
     description: site.description,
     images: ["/og-image.png"],
   },
@@ -55,7 +55,6 @@ const jsonLd = {
   "@type": "Organization",
   "@id": `${site.url}/#organization`,
   name: site.name,
-  alternateName: "Alpha Zenith Life Optimization",
   url: site.url,
   logo: `${site.url}/logos/azlo-logo-real.png`,
   description: site.description,

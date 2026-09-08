@@ -3,12 +3,14 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@/components/site/Icons";
 import { SectionIntro } from "@/components/site/SectionIntro";
 import { TeamCard } from "@/components/site/TeamCard";
-import { principles, team } from "@/data/site";
+import { currentTeam, futureRoles, method } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Método e time",
-  description: "Como a AZLO pensa, constrói e mantém sistemas com contexto técnico e revisão humana.",
+  description: "Como a AZLO entende, desenha, constrói e opera sistemas para contextos reais.",
   alternates: { canonical: "/sobre" },
+  openGraph: { title: "Método e time | AZLO", description: "Como a AZLO entende, desenha, constrói e opera sistemas para contextos reais.", url: "/sobre" },
+  twitter: { card: "summary_large_image", title: "Método e time | AZLO", description: "Como a AZLO entende, desenha, constrói e opera sistemas para contextos reais." },
 };
 
 export default function AboutPage() {
@@ -18,24 +20,24 @@ export default function AboutPage() {
         <div className="site-frame">
           <p className="eyebrow eyebrow--light"><span />Método & time</p>
           <h1>Projetar para a realidade é uma escolha de engenharia.</h1>
-          <p>A AZLO trabalha entre software, infraestrutura, dados e saúde sem transformar complexidade em slogan. A medida é simples: o sistema precisa ser entendível, operável e responsável.</p>
+          <p>A AZLO trabalha entre software, infraestrutura, dados e saúde. A medida é simples: o sistema precisa ser entendível, operável e responsável.</p>
         </div>
       </section>
       <section className="section methodology">
         <div className="site-frame methodology__layout">
-          <div><p className="eyebrow"><span />Método</p><h2>Do cenário ao sistema, em etapas que podem ser examinadas.</h2></div>
+          <div><p className="eyebrow"><span />Método</p><h2>Contexto antes de <em>ferramenta.</em></h2><p className="methodology__lead">Uma sequência curta para transformar um problema em sistema operável.</p></div>
           <ol className="methodology__steps">
-            <li><span>01</span><div><h3>Diagnosticar</h3><p>Fazer perguntas sobre processo, restrição, segurança, dados, dependência e impacto antes de escolher uma ferramenta.</p></div></li>
-            <li><span>02</span><div><h3>Construir com limite</h3><p>Separar o que é automação, o que é apoio à decisão e o que continua sob responsabilidade direta de uma pessoa.</p></div></li>
-            <li><span>03</span><div><h3>Operar e revisar</h3><p>Documentar, observar e iterar para que a entrega sobreviva ao ambiente em que foi instalada.</p></div></li>
+            {method.map((item) => <li key={item.number}><span>{item.number}</span><div><h3>{item.title}</h3><p>{item.text}</p></div></li>)}
           </ol>
         </div>
       </section>
-      <section className="section principles">
-        <div className="site-frame"><SectionIntro eyebrow="Critérios" title={<>O que não abrimos mão ao desenhar <em>tecnologia aplicada.</em></>} align="start" /><div className="principles-grid">{principles.map((principle) => <article key={principle.number}><span>{principle.number}</span><h3>{principle.title}</h3><p>{principle.text}</p></article>)}</div></div>
-      </section>
       <section className="section team-section">
-        <div className="site-frame"><SectionIntro eyebrow="Equipe" title={<>Pessoas atuais e as posições que podem <em>ampliar a equipe.</em></>} text="Os cards com a marca “Expanding the team” são posições futuras, não integrantes confirmados." /><div className="team-grid">{team.map((member) => <TeamCard key={`${member.name}-${member.role}`} member={member} />)}</div><Link className="section-link" href="/contato">Falar com a AZLO <ArrowRightIcon /></Link></div>
+        <div className="site-frame">
+          <SectionIntro eyebrow="Equipe" title={<>Pessoas próximas do <em>problema.</em></>} text="Responsabilidades atuais e posições futuras aparecem em blocos distintos." />
+          <div className="team-subsection"><p className="eyebrow"><span />Equipe atual</p><div className="team-grid">{currentTeam.map((member) => <TeamCard key={member.name} member={member} />)}</div></div>
+          <div className="team-subsection team-subsection--future"><p className="eyebrow"><span />Expansão</p><h2>Posições em discussão para ampliar a capacidade de produto e construção.</h2><div className="team-grid">{futureRoles.map((member) => <TeamCard key={member.name} member={member} />)}</div></div>
+          <Link className="section-link" href="/contato">Falar com a AZLO <ArrowRightIcon /></Link>
+        </div>
       </section>
     </main>
   );

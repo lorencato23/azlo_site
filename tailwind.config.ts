@@ -26,7 +26,7 @@ const config: Config = {
           "ice-deep": "#E4F0F5", // derivada — hover/superfícies alternadas
           graphite: "#111827", // texto principal em contexto editorial
           slate: "#46586B", // derivada — texto secundário sobre claro
-          muted: "#7C8CA0", // derivada — labels/metadados (só texto grande)
+          muted: "#5B6C7C", // derivada — labels/metadados com contraste reforçado
           line: "#D8E6ED", // derivada — bordas e separadores sobre claro
         },
       },

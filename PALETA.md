@@ -32,7 +32,7 @@ brand book.
 | `teal-ink` | `#056072` | Texto de acento sobre fundo claro (Arc Teal puro não passa AA em texto). |
 | `ice-deep` | `#E4F0F5` | Superfícies alternadas / hover sobre claro. |
 | `slate` | `#46586B` | Texto secundário sobre fundo claro. |
-| `muted` | `#7C8CA0` | Labels e metadados (só texto grande — ver contraste). |
+| `muted` | `#5B6C7C` | Labels e metadados com contraste reforçado. |
 | `line` | `#D8E6ED` | Bordas e separadores sobre fundo claro. |
 
 ## Acento-assinatura por divisão (Brand Book v4)

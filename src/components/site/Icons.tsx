@@ -46,3 +46,12 @@ export function LayerIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function CopyIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <rect x="8" y="8" width="11" height="11" rx="1.5" />
+      <path d="M16 8V5.7A1.7 1.7 0 0 0 14.3 4H5.7A1.7 1.7 0 0 0 4 5.7v8.6A1.7 1.7 0 0 0 5.7 16H8" />
+    </svg>
+  );
+}

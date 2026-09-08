@@ -56,7 +56,7 @@ const ogBg = Buffer.from(
      <rect width="1200" height="630" fill="url(#glow)"/>
      <text x="600" y="556" font-family="Georgia, 'Times New Roman', serif"
            font-size="32" fill="#8FD8E4" text-anchor="middle">
-       Ideias que ganham forma.
+       Engenharia para operações reais.
      </text>
    </svg>`
 );

@@ -1,10 +1,20 @@
-export type ProjectStatus = "Produto em evolução" | "Consultoria e engenharia" | "Contribuição em fork" | "Conceito operacional" | "Sistemas sob medida" | "MVP funcional";
+export type ProjectStatus = "CLOSED BETA" | "OPEN SOURCE" | "R&D" | "MVP EM REVISÃO";
 
 export type Service = {
   index: string;
   title: string;
-  summary: string;
-  deliverables: string[];
+  problem: string;
+  intervention: string;
+  capabilities: string[];
+  nextStep: string;
+};
+
+export type ProjectCase = {
+  problem: string;
+  intervention: string;
+  architecture: string[];
+  statusDetail: string;
+  boundary?: string;
 };
 
 export type Project = {
@@ -13,11 +23,9 @@ export type Project = {
   status: ProjectStatus;
   title: string;
   summary: string;
-  detail: string;
   tags: string[];
-  href?: string;
-  external?: boolean;
-  note?: string;
+  externalUrl?: string;
+  caseStudy?: ProjectCase;
   featured?: boolean;
 };
 
@@ -32,7 +40,7 @@ export type TeamMember = {
 
 export const site = {
   name: "AZLO",
-  description: "Engenharia de IA, infraestrutura e software para fluxos reais.",
+  description: "Engenharia de IA, infraestrutura e software para operações reais.",
   email: "contato@azlo.com.br",
   url: "https://azlo.com.br",
 };
@@ -47,112 +55,104 @@ export const navigation = [
 export const services: Service[] = [
   {
     index: "01",
-    title: "Sistemas clínicos e HIS",
-    summary:
-      "Diagnóstico, desenvolvimento e otimização de sistemas que sustentam a operação de hospitais e clínicas privadas.",
-    deliverables: [
-      "Fluxos hospitalares e integrações",
-      "Automação de processos internos",
-      "Otimização de infraestrutura e sistemas",
-    ],
+    title: "Sistemas clínicos que travam a operação",
+    problem: "HIS, integrações e rotinas internas que concentram retrabalho, perda de contexto ou manutenção difícil.",
+    intervention: "Diagnóstico técnico, evolução de fluxos e integração de sistemas para hospitais e clínicas privadas.",
+    capabilities: ["HIS e workflows clínicos", "Integrações e automação", "Infraestrutura e sistemas internos"],
+    nextStep: "Discutir um sistema clínico",
   },
   {
     index: "02",
-    title: "IA integrada ao ambiente real",
-    summary:
-      "Instalação e adaptação de LLMs, agentes e bases de conhecimento ao fluxo, às permissões e à infraestrutura de cada organização.",
-    deliverables: [
-      "RAG, bancos vetoriais e pipelines",
-      "Inferência local, APIs e agentes",
-      "VPS, servidores privados e hardware próprio",
-    ],
+    title: "Conhecimento disperso e decisões lentas",
+    problem: "Informação existe, mas não chega com contexto, permissão e rastreabilidade ao momento de uso.",
+    intervention: "IA integrada ao workflow, com modelos, RAG, agentes e bases de conhecimento definidos a partir do ambiente real.",
+    capabilities: ["LLMs e agentes", "RAG e bancos vetoriais", "Inferência local e APIs"],
+    nextStep: "Discutir uma hipótese de IA",
   },
   {
     index: "03",
-    title: "Software, dados e automação",
-    summary:
-      "Produtos internos e sistemas sob medida para reduzir atrito operacional sem substituir o julgamento de quem executa o trabalho.",
-    deliverables: [
-      "Bots e assistentes internos",
-      "Integrações e automações auditáveis",
-      "Arquitetura de dados e observabilidade",
-    ],
+    title: "Infraestrutura que precisa ser operável",
+    problem: "Servidores, dados e serviços crescem sem uma camada clara de observação, manutenção e decisão.",
+    intervention: "Arquitetura de infraestrutura e dados para VPS, cloud, ambientes privados e hardware pertencente à organização.",
+    capabilities: ["VPS e servidores privados", "Dados e observabilidade", "Pipelines e ambientes isolados"],
+    nextStep: "Discutir infraestrutura e dados",
+  },
+  {
+    index: "04",
+    title: "Processos repetitivos sem rastreabilidade",
+    problem: "Equipes repetem tarefas, trocam contexto entre ferramentas e dependem de rotinas que não deixam trilha clara.",
+    intervention: "Software sob medida, bots e automações desenhados para permissões, integrações e revisão de quem responde pela operação.",
+    capabilities: ["Ferramentas internas", "Integrações e automações", "Assistentes empresariais"],
+    nextStep: "Discutir uma automação",
   },
 ];
 
 export const projects: Project[] = [
   {
     slug: "logosmed",
-    category: "Produto · aprendizagem adaptativa",
-    status: "Produto em evolução",
+    category: "Produto educacional · saúde",
+    status: "CLOSED BETA",
     title: "LogosMed",
-    summary: "Sistema de aprendizado adaptativo para transformar estudo em percurso estruturado.",
-    detail:
-      "Uma plataforma orientada a aprendizado adaptativo, com foco em prática deliberada, organização de conteúdo e progressão individual.",
-    tags: ["Aprendizagem adaptativa", "Produto educacional", "Sistemas de estudo"],
-    href: "https://pj.azlo.com.br",
-    external: true,
+    summary: "Treino adaptativo para transformar cada resposta em um próximo passo de estudo.",
+    tags: ["Rating", "Seleção adaptativa", "Progresso individual"],
+    externalUrl: "https://pj.azlo.com.br",
     featured: true,
-  },
-  {
-    slug: "his",
-    category: "Healthcare systems · engenharia",
-    status: "Consultoria e engenharia",
-    title: "Otimização de HIS e sistemas clínicos",
-    summary: "Tecnologia aplicada a hospitais, clínicas e workflows que não podem parar.",
-    detail:
-      "Atuação em diagnóstico técnico, integração, automação e evolução de sistemas internos, com foco em eficiência operacional e clareza de fluxo.",
-    tags: ["HIS", "Clínicas", "Integração", "Infraestrutura"],
-    featured: true,
+    caseStudy: {
+      problem: "Estudo por questões costuma acumular volume sem transformar resposta, erro e retorno em um percurso individual de prática.",
+      intervention: "Sessões rated conectam questão, feedback, rating e seleção dinâmica do próximo item para tornar a evolução visível ao longo do tempo.",
+      architecture: ["Next.js · React · TypeScript", "API server-side", "Supabase · PostgreSQL · Auth · RLS", "Rating global e por grandes áreas"],
+      statusDetail: "Closed beta persistente. O produto segue em revisão editorial e rollout progressivo.",
+      boundary: "Uso educacional. Não certifica competência nem oferece orientação clínica individual.",
+    },
   },
   {
     slug: "hermes-agent",
-    category: "Open source · eficiência",
-    status: "Contribuição em fork",
+    category: "Contribuição open source · busca",
+    status: "OPEN SOURCE",
     title: "Hermes Agent",
-    summary: "Patches documentados para tornar a busca de sessões mais eficiente e verificável.",
-    detail:
-      "Contribuições em um fork do Hermes Agent para busca de sessões com FTS5: paginação em duas fases e testes de equivalência para filtros, paginação, ordenação temporal e rota CJK. Sem alegação de merge no repositório oficial.",
-    tags: ["FTS5", "Busca", "Performance", "Testes"],
-    note: "Trabalho documentado em fork; não apresentado como recurso incorporado ao projeto oficial.",
-    featured: true,
+    summary: "Otimização documentada de busca de sessões FTS5 em um fork do Hermes Agent.",
+    tags: ["FTS5", "Paginação", "Equivalência", "Testes"],
+    caseStudy: {
+      problem: "Busca ordenada por recência pode fazer trabalho de snippet antes de saber quais resultados realmente entram na página.",
+      intervention: "Patches implementam paginação em duas fases para a rota de busca, mantendo equivalência de filtros e ordenação e cobrindo a rota CJK com testes.",
+      architecture: ["FTS5", "Consulta em duas fases", "Ordenação temporal", "Testes de filtros e paginação"],
+      statusDetail: "Contribuição documentada em fork. Não é apresentada como alteração incorporada ao repositório oficial.",
+    },
   },
   {
     slug: "ana",
-    category: "Infraestrutura · agentes",
-    status: "Conceito operacional",
+    category: "Infraestrutura · agentes locais",
+    status: "R&D",
     title: "Atlas Nano Agent · ANA",
-    summary: "Harness de IA para estruturar troubleshooting de VPS e servidores Linux.",
-    detail:
-      "Um agente voltado a diagnóstico de infraestrutura, investigação de erros, preparação de ambientes e automação operacional. O foco é organizar sinais, hipóteses e ações assistidas com limites claros de execução.",
-    tags: ["Linux", "VPS", "Troubleshooting", "Operações"],
-    note: "Conceito em evolução. Automação não substitui revisão humana em mudanças de infraestrutura.",
+    summary: "Harness local para transformar sinais de Linux em investigação, plano assistido e trilha de auditoria.",
+    tags: ["Linux", "Incidentes", "Auditoria", "Ações assistidas"],
     featured: true,
-  },
-  {
-    slug: "agentes-personalizados",
-    category: "Automação · sistemas internos",
-    status: "Sistemas sob medida",
-    title: "Bots e agentes personalizados",
-    summary: "Assistentes internos desenhados para a rotina, os dados e as permissões de cada empresa.",
-    detail:
-      "Criação de bots, agentes e integrações para executar tarefas operacionais, organizar solicitações e conectar sistemas. Casos reais são tratados de forma confidencial, sem exposição de contas, endpoints ou dados de clientes.",
-    tags: ["Agentes", "Automação", "Integrações", "Sistemas internos"],
+    caseStudy: {
+      problem: "Troubleshooting de servidores dispersa sinais, hipóteses, tentativas e evidências de recuperação entre ferramentas e pessoas.",
+      intervention: "O harness organiza incidentes, fatos, hipóteses e linha do tempo, oferecendo diagnóstico de leitura e ações assistidas com aprovação e rechecagem.",
+      architecture: ["Python · daemon · CLI/TUI", "SQLite com WAL", "Sockets Unix", "Broker separado para ação privilegiada limitada"],
+      statusDetail: "R&D operacional. A autonomia é limitada e o modo de operação permanece experimental.",
+      boundary: "Não é apresentado como remediação autônoma de produção ou monitoramento geral de infraestrutura.",
+    },
   },
   {
     slug: "hermes-office-next",
-    category: "Produtividade · IA local",
-    status: "MVP funcional",
+    category: "Produtividade local-first · documentos",
+    status: "MVP EM REVISÃO",
     title: "Hermes Office Next",
-    summary: "Produtividade local-first com documentos reais, IA assistiva e aprovação humana.",
-    detail:
-      "Aplicativo que combina LibreOffice e assistência de IA para ajudar a revisar documentos. A pessoa controla o contexto, revisa propostas e aprova alterações antes da aplicação em cópia.",
-    tags: ["Local-first", "LibreOffice", "IA assistiva", "Documentos"],
-    note: "MVP funcional; publicação e distribuição ampla dependem de validações adicionais.",
+    summary: "Assistência de IA para documentos reais, com contexto autorizado, diff e aprovação antes da aplicação.",
+    tags: ["LibreOffice", "Contexto autorizado", "Diff", "Cópia preservada"],
+    caseStudy: {
+      problem: "Assistência de IA em documentos perde valor quando invade o contexto, altera o original ou não deixa a pessoa revisar o que será aplicado.",
+      intervention: "O documento entra em contexto por autorização; propostas passam por validação e preview, e alterações aprovadas são aplicadas em cópia com Undo do LibreOffice disponível.",
+      architecture: ["Electron · React", "Sidecar Python · UNO", "LibreOffice Writer · Calc · Impress", "Gateway Hermes opcional em loopback"],
+      statusDetail: "MVP local-first em revisão humana de publicação. A validação exercitada está documentada para Windows e LibreOffice.",
+      boundary: "Não é apresentado como distribuição ampla nem como compatível com todos os formatos ou sistemas operacionais.",
+    },
   },
 ];
 
-export const team: TeamMember[] = [
+export const currentTeam = [
   {
     name: "Gabriel Lorençato",
     role: "Projetista",
@@ -174,43 +174,39 @@ export const team: TeamMember[] = [
     initials: "AL",
     linkedin: "https://www.linkedin.com/in/alan-lima-7568451a5",
   },
+] satisfies TeamMember[];
+
+export const futureRoles = [
   {
-    name: "Fulana",
-    role: "Product Manager",
-    expertise: ["Product Strategy", "Product Discovery", "Roadmap & Delivery"],
+    name: "Product Manager",
+    role: "Posição em discussão",
+    expertise: ["Product Strategy", "Discovery", "Roadmap & Delivery"],
     initials: "PM",
     future: true,
   },
   {
-    name: "Ciclano",
-    role: "Backend Developer",
-    expertise: ["APIs & Distributed Systems", "Backend Architecture", "Integrations & Automation"],
+    name: "Backend Developer",
+    role: "Posição em discussão",
+    expertise: ["APIs", "Backend Architecture", "Integrations & Automation"],
     initials: "BE",
     future: true,
   },
   {
-    name: "Beltrano",
-    role: "Frontend UI/UX Developer",
-    expertise: ["Frontend Engineering", "UI/UX Design", "Design Systems"],
+    name: "Frontend / UI/UX",
+    role: "Posição em discussão",
+    expertise: ["Frontend Engineering", "Product UI", "Design Systems"],
     initials: "UX",
     future: true,
   },
+] satisfies TeamMember[];
+
+export const method = [
+  { number: "01", title: "Entender", text: "Ler fluxo, restrição, dados e impacto antes de escolher ferramenta." },
+  { number: "02", title: "Desenhar", text: "Definir arquitetura, fronteiras de automação e responsabilidades." },
+  { number: "03", title: "Construir", text: "Integrar e validar uma intervenção que caiba no ambiente real." },
+  { number: "04", title: "Operar", text: "Observar, documentar e evoluir com quem mantém o sistema." },
 ];
 
-export const principles = [
-  {
-    number: "01",
-    title: "Contexto antes de ferramenta",
-    text: "A tecnologia começa pelo trabalho que já existe: pessoas, decisões, dados, restrições e risco operacional.",
-  },
-  {
-    number: "02",
-    title: "Arquitetura que pode ser operada",
-    text: "Projetamos sistemas que cabem no ambiente real: infraestrutura disponível, controle de acesso, manutenção e continuidade.",
-  },
-  {
-    number: "03",
-    title: "Automação com responsabilidade",
-    text: "Toda automação precisa deixar claro o que executa, o que registra e onde a revisão humana continua indispensável.",
-  },
-];
+export const featuredProjects = projects.filter((project) => project.featured);
+export const caseStudyProjects = projects.filter((project) => project.caseStudy);
+export const getProject = (slug: string) => projects.find((project) => project.slug === slug);
