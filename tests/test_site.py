@@ -3,63 +3,65 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE_DIR = ROOT / "extraido_290626" / "site"
 
 
-class SitePositioningTests(unittest.TestCase):
-    def test_site_describes_azlo_honestly_without_fake_clinical_operation(self) -> None:
-        html = (SITE_DIR / "index.html").read_text(encoding="utf-8").lower()
+class PublicSiteTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.layout = (ROOT / "src" / "app" / "layout.tsx").read_text(encoding="utf-8")
+        self.home = (ROOT / "src" / "app" / "page.tsx").read_text(encoding="utf-8")
+        self.data = (ROOT / "src" / "data" / "site.ts").read_text(encoding="utf-8")
+        self.header = (ROOT / "src" / "components" / "site" / "SiteHeader.tsx").read_text(encoding="utf-8")
+        self.team_card = (ROOT / "src" / "components" / "site" / "TeamCard.tsx").read_text(encoding="utf-8")
+        self.css = (ROOT / "src" / "app" / "globals.css").read_text(encoding="utf-8")
 
-        self.assertIn("marca-mãe", html)
-        self.assertIn("não é uma clínica", html)
-        self.assertIn("azlo health", html)
-        self.assertIn("azlo labs", html)
-        self.assertIn("azlo education", html)
-        self.assertIn("azlo science", html)
-        self.assertIn("mailto:contato@azlo.com.br", html)
-        self.assertIn(">contato@azlo.com.br</a>", html)
+    def test_public_routes_are_present(self) -> None:
+        for route in ("servicos", "projetos", "sobre", "contato"):
+            self.assertTrue((ROOT / "src" / "app" / route / "page.tsx").is_file())
 
-        self.assertNotIn("score de aderência", html)
-        self.assertNotIn(">84<", html)
-        self.assertNotIn("iniciar diagnóstico", html)
-        self.assertNotIn("começar pelo diagnóstico", html)
+    def test_repositioning_and_required_projects_are_present(self) -> None:
+        for phrase in (
+            "Sistemas clínicos e HIS",
+            "IA integrada ao ambiente real",
+            "LogosMed",
+            "Hermes Agent",
+            "Atlas Nano Agent · ANA",
+            "Bots e agentes personalizados",
+            "https://pj.azlo.com.br",
+        ):
+            self.assertIn(phrase, self.data)
 
-    def test_current_metadata_uses_the_custom_domain(self) -> None:
-        layout = (ROOT / "src" / "app" / "layout.tsx").read_text(encoding="utf-8")
-        robots = (ROOT / "public" / "robots.txt").read_text(encoding="utf-8")
+    def test_team_has_current_and_future_positions(self) -> None:
+        for name in ("Gabriel Lorençato", "Karson Godinho", "Alan Lima", "Fulana", "Ciclano", "Beltrano"):
+            self.assertIn(name, self.data)
+        self.assertEqual(self.data.count("future: true"), 3)
+        self.assertIn('target="_blank"', self.team_card)
+        self.assertIn('rel="noreferrer"', self.team_card)
+        self.assertIn("Perfil em breve", self.team_card)
+
+    def test_navigation_works_without_javascript(self) -> None:
+        self.assertIn("<details", self.header)
+        self.assertIn("<summary>", self.header)
+        self.assertIn("mobile-nav", self.css)
+        self.assertNotIn("use client", self.header)
+
+    def test_metadata_and_sitemap_use_custom_domain(self) -> None:
         sitemap = (ROOT / "public" / "sitemap.xml").read_text(encoding="utf-8")
+        self.assertIn('url: "https://azlo.com.br"', self.data)
+        self.assertIn("metadataBase: new URL(site.url)", self.layout)
+        for path in ("/servicos/", "/projetos/", "/sobre/", "/contato/"):
+            self.assertIn(f"https://azlo.com.br{path}", sitemap)
+        self.assertNotIn("azlo-site.vercel.app", self.layout + self.data + sitemap)
 
-        self.assertIn('const siteUrl = "https://azlo.com.br"', layout)
-        self.assertIn("https://azlo.com.br/sitemap.xml", robots)
-        self.assertIn("<loc>https://azlo.com.br/</loc>", sitemap)
-        self.assertNotIn("azlo-site.vercel.app", layout + robots + sitemap)
-
-    def test_content_remains_visible_if_external_javascript_fails(self) -> None:
-        html = (SITE_DIR / "index.html").read_text(encoding="utf-8")
-        css = (SITE_DIR / "styles.css").read_text(encoding="utf-8")
-        script = (SITE_DIR / "script.js").read_text(encoding="utf-8")
-
-        self.assertNotIn('classList.add("js")', html)
-        self.assertIn(".reveal {\n  opacity: 1;", css)
-        self.assertIn("html.reveal-ready .reveal:not(.is-visible)", css)
-        self.assertNotIn("opacity: 0;", css)
-        self.assertIn('classList.add("reveal-ready")', script)
-
-    def test_mobile_menu_exposes_and_updates_accessible_state(self) -> None:
-        html = (SITE_DIR / "index.html").read_text(encoding="utf-8")
-        css = (SITE_DIR / "styles.css").read_text(encoding="utf-8")
-        script = (SITE_DIR / "script.js").read_text(encoding="utf-8")
-
-        self.assertIn('aria-controls="navegacao-principal"', html)
-        self.assertIn('"Fechar menu"', script)
-        self.assertIn('event.key === "Escape"', script)
-        self.assertIn('classList.add("js-enabled")', script)
-        self.assertIn("html:not(.js-enabled) .site-header", css)
-        self.assertIn("html.js-enabled .site-header.nav-open .site-nav", css)
-        self.assertIn("justify-self: stretch;", css)
-        self.assertIn("navLinks[0]?.focus()", script)
-        self.assertIn("restoreFocus: event.detail === 0", script)
-        self.assertIn("requestAnimationFrame(() => menuButton.focus())", script)
+    def test_public_code_has_no_known_secret_literals_or_private_previews(self) -> None:
+        public_source = "\n".join((
+            self.layout,
+            self.home,
+            self.data,
+            self.header,
+            (ROOT / "src" / "components" / "site" / "SiteFooter.tsx").read_text(encoding="utf-8"),
+        )).lower()
+        for prohibited in ("ghp_", "private key", "individual clinical guide", "anki analytics", "process.env"):
+            self.assertNotIn(prohibited, public_source)
 
 
 if __name__ == "__main__":
