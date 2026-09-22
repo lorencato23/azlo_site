@@ -1,51 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRightIcon } from "@/components/site/Icons";
-import { SectionIntro } from "@/components/site/SectionIntro";
-import { ServiceCard } from "@/components/site/ServiceCard";
 import { services } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Serviços",
-  description: "Intervenções em sistemas clínicos, IA integrada, infraestrutura, dados e automação para operações reais.",
-  alternates: { canonical: "/servicos" },
-  openGraph: { title: "Serviços | AZLO", description: "Intervenções em sistemas clínicos, IA integrada, infraestrutura, dados e automação para operações reais.", url: "/servicos" },
-  twitter: { card: "summary_large_image", title: "Serviços | AZLO", description: "Intervenções em sistemas clínicos, IA integrada, infraestrutura, dados e automação para operações reais." },
-};
+export const metadata: Metadata = { title: "Engineering", description: "Sistemas clínicos, IA integrada, infraestrutura, dados e automação para operações reais.", alternates: { canonical: "/servicos" }, openGraph: { title: "Engineering | AZLO", description: "Sistemas clínicos, IA integrada, infraestrutura, dados e automação para operações reais.", url: "/servicos" } };
 
 export default function ServicesPage() {
-  return (
-    <main id="main">
-      <section className="page-hero page-hero--navy">
-        <div className="site-frame">
-          <p className="eyebrow eyebrow--light"><span />Serviços</p>
-          <h1>Problemas diferentes. Uma engenharia que começa pelo ambiente.</h1>
-          <p>Organizamos a atuação pelo que precisa mudar na operação — e usamos tecnologia como meio, não como produto isolado.</p>
-          <Link className="button button--primary page-hero__cta" href="/contato">Descrever um problema <ArrowRightIcon /></Link>
-        </div>
-      </section>
-      <section className="section section--paper">
-        <div className="site-frame">
-          <SectionIntro eyebrow="Onde entramos" title={<>Quatro fricções, quatro formas de <em>intervir.</em></>} text="A conversa começa pelo fluxo, pela equipe e pelas restrições que tornam uma solução sustentável." align="start" />
-          <div className="service-grid service-grid--page">
-            {services.map((service) => <ServiceCard key={service.index} service={service} />)}
-          </div>
-        </div>
-      </section>
-      <section className="section service-detail">
-        <div className="site-frame service-detail__grid">
-          <div><p className="eyebrow"><span />Recursos técnicos</p><h2>A ferramenta entra depois da <em>pergunta certa.</em></h2></div>
-          <div>
-            <p>LLMs, agentes, RAG, bancos vetoriais, APIs, VPS e pipelines fazem parte do repertório. A escolha depende dos dados, permissões, infraestrutura e manutenção que o contexto suporta.</p>
-            <ul>
-              <li>Integração de IA a workflows existentes</li>
-              <li>Implantação em VPS, servidores privados ou hardware próprio</li>
-              <li>Automação com logs, limites e pontos de aprovação</li>
-            </ul>
-            <Link className="section-link" href="/contato">Discutir um contexto técnico <ArrowRightIcon /></Link>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+  return <main id="main" className="engineering-page"><section className="page-hero page-hero--dark"><div className="page-hero__grid" aria-hidden="true" /><div className="site-frame"><p className="breadcrumb mono-label">AZLO / ENGINEERING</p><p className="eyebrow eyebrow--light"><span />SYSTEMS ENGINEERING</p><h1>Intervenções que começam pelo <em>ambiente.</em></h1><p>Organizamos a atuação pelo que precisa mudar na operação — e usamos tecnologia como meio, não como produto isolado.</p><Link className="button button--primary page-hero__cta" href="/contato">Descrever um problema <ArrowRightIcon /></Link></div></section><section className="section section--light"><div className="site-frame"><div className="section-heading"><p className="eyebrow"><span />ENGINEERING MODULES</p><h2>Quatro camadas para fazer o sistema <em>operar.</em></h2></div><div className="engineering-grid engineering-grid--page">{services.map((service) => <article className="engineering-module" key={service.index}><span className="engineering-module__number">{service.index}</span><p className="mono-label">{service.module}</p><h3>{service.title}</h3><p>{service.intervention}</p><ul>{service.capabilities.map((capability) => <li key={capability}>{capability}</li>)}</ul><a href={`mailto:contato@azlo.com.br?subject=${encodeURIComponent(service.nextStep)}`}>{service.nextStep} <ArrowRightIcon /></a></article>)}</div></div></section><section className="section engineering-principles"><div className="site-frame"><div className="section-heading section-heading--split"><div><p className="eyebrow eyebrow--light"><span />BOUNDARIES</p><h2>Contexto antes de <em>ferramenta.</em></h2></div><p>LLMs, agentes, RAG, bancos vetoriais, APIs, VPS e pipelines fazem parte do repertório. A escolha depende dos dados, permissões, infraestrutura e manutenção que o contexto suporta.</p></div><ul className="principle-rail"><li><span>01</span><strong>Observe</strong><p>Leia fluxo, sinais e impacto antes de intervir.</p></li><li><span>02</span><strong>Limit</strong><p>Defina permissões, fronteiras e pontos de aprovação.</p></li><li><span>03</span><strong>Document</strong><p>Deixe uma trilha que outra pessoa consiga operar.</p></li></ul></div></section></main>;
 }

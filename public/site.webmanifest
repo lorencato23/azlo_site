@@ -1,22 +1,13 @@
 {
   "name": "AZLO",
   "short_name": "AZLO",
-  "description": "Engenharia de IA, infraestrutura e software para operações reais.",
+  "description": "Engenharia de sistemas, IA, software e infraestrutura para operações reais.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F2FAFC",
-  "theme_color": "#052B57",
+  "background_color": "#050B12",
+  "theme_color": "#050B12",
   "icons": [
-    {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    }
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" }
   ]
 }

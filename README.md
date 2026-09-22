@@ -1,32 +1,41 @@
 # AZLO
 
-Site institucional da AZLO: engenharia de IA, infraestrutura e software para operações reais — com atuação em sistemas clínicos, automação, dados e tecnologia aplicada à saúde.
+Site institucional da AZLO: uma organização de engenharia que projeta sistemas para operações reais e constrói instrumentos próprios em Labs.
+
+## Arquitetura de marca
+
+- **AZLO / ENGINEERING** — sistemas clínicos, IA integrada, infraestrutura & dados e automação.
+- **AZLO / LABS** — MNEMUSA, THOTH, LOGOS, ODIN, ANUBIS, HERMES e ATLAS.
+- Produtos permanecem subordinados à marca AZLO; páginas públicas usam assinaturas como `AZLO / LABS / MNEMUSA`.
 
 ## Stack
 
 - Next.js 14 e React 18
-- TypeScript
-- CSS com tokens do Brand Book AZLO v4
+- TypeScript com App Router
+- CSS global tokenizado em `src/app/globals.css`
 - export estático para `out/`
-- Fraunces e Hanken Grotesk self-hosted
+- Fraunces e Hanken Grotesk self-hosted; a interface usa Hanken como display/body e uma pilha monospace para metadados
 
 ## Estrutura
 
 ```text
 src/
-  app/                 # homepage, páginas públicas e cases estáticos
-  components/site/     # shell, navegação, cards, fluxos e cases
-  data/site.ts         # fonte única de navegação, serviços, projetos e equipe
+  app/                 # home, Engineering, Labs, Work, Company e rotas de produto/case
+  components/site/     # shell, navegação, sigils, cards, filtros e templates
+  data/site.ts         # fonte única de marca, serviços, produtos, projetos e equipe
+docs/audits/           # registros locais de estado e decisões de reforma
 ```
 
-Páginas públicas:
+## Páginas públicas
 
-- `/` — posicionamento, problemas, trabalho selecionado, método, equipe e contato
-- `/servicos/` — problemas operacionais e escopos de intervenção
-- `/projetos/` — portfólio e estágio de cada iniciativa
-- `/projetos/<slug>/` — cases com contexto, intervenção, arquitetura e status
-- `/sobre/` — método e equipe atual/expansão
-- `/contato/` — conversa por e-mail e orientação de segurança
+- `/` — posicionamento, topologia, Engineering, Labs, Work, método, equipe e contato
+- `/servicos/` — módulos AZLO / Engineering
+- `/labs/` — matriz de produtos próprios e sistemas experimentais
+- `/labs/<slug>/` — template reutilizável de produto
+- `/projetos/` — Work com filtros Product, Engineering, R&D e Open Source
+- `/projetos/<slug>/` — cases com contexto, intervenção, arquitetura e estado
+- `/sobre/` — método, equipe atual e posições futuras em discussão
+- `/contato/` — conversa por e-mail e limites de segurança
 
 ## Desenvolvimento e verificação
 
@@ -38,7 +47,7 @@ npm run build
 python3 -m unittest discover -s tests -v
 ```
 
-O projeto usa `output: "export"` em `next.config.mjs`. A Vercel executa `npm run build` e publica a saída estática. Para inspecionar o export localmente, use um servidor estático, por exemplo:
+O projeto usa `output: "export"` em `next.config.mjs`. A Vercel executa `npm run build` e publica a saída estática. Para inspecionar o export localmente, use:
 
 ```bash
 python3 -m http.server 3100 --directory out
@@ -46,12 +55,16 @@ python3 -m http.server 3100 --directory out
 
 `npm run start` não é o fluxo de preview deste projeto porque o Next.js não inicia servidor de produção com `output: "export"`.
 
-## Conteúdo e privacidade
+## Conteúdo, status e proveniência
 
-`src/data/site.ts` é a fonte de verdade para conteúdo público. Todo projeto precisa ter estágio e descrição factual; cases só são gerados quando existe contexto, intervenção, arquitetura e status verificáveis. Não inclua métricas não verificadas, dados de clientes, tokens, credenciais, IPs privados, endpoints internos ou previews de dados pessoais/clínicos.
+`src/data/site.ts` é a fonte de verdade para conteúdo público. Cada projeto e produto precisa ter descrição factual, domínio e estado explicitamente delimitados. Versões e milestones só aparecem quando existem no material operacional verificado; o restante é marcado como sem versão pública, incubating ou concept.
 
 O contato usa `mailto:` e cópia local do e-mail; não há coleta ou armazenamento de formulário no site.
 
-## Integridade da marca
+## Identidade visual
+
+A interface é dark-first, com superfícies midnight navy, bordas técnicas, grids sutis, azul frio como sinal e verde apenas para estados operacionais positivos. SVG/CSS são usados para topologia e sigils; não há imagens stock, partículas, fake terminal ou efeitos globais.
+
+Os tokens principais vivem em `src/app/globals.css` e são espelhados em `tailwind.config.ts`: `bg`, `surface`, `surfaceElevated`, `border`, `textPrimary`, `textSecondary`, `textMuted`, `accent`, `success`, `warning`, espaçamento, raios e durações.
 
 Os PNGs em `public/logos/azlo-*-real*.png` são os assets visuais aprovados. Vetorizações experimentais permanecem no acervo histórico em `extraido_290626/` e não devem ir para `public/` nem para o deploy.

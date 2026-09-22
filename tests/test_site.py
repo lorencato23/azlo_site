@@ -13,13 +13,34 @@ class PublicSiteTests(unittest.TestCase):
         self.header = (ROOT / "src" / "components" / "site" / "SiteHeader.tsx").read_text(encoding="utf-8")
         self.mobile_nav = (ROOT / "src" / "components" / "site" / "MobileNav.tsx").read_text(encoding="utf-8")
         self.project_card = (ROOT / "src" / "components" / "site" / "ProjectCard.tsx").read_text(encoding="utf-8")
+        self.product_card = (ROOT / "src" / "components" / "site" / "ProductCard.tsx").read_text(encoding="utf-8")
+        self.product_template = (ROOT / "src" / "components" / "site" / "ProductTemplate.tsx").read_text(encoding="utf-8")
         self.team_card = (ROOT / "src" / "components" / "site" / "TeamCard.tsx").read_text(encoding="utf-8")
         self.css = (ROOT / "src" / "app" / "globals.css").read_text(encoding="utf-8")
 
     def test_public_routes_are_present(self) -> None:
         for route in ("servicos", "projetos", "sobre", "contato"):
             self.assertTrue((ROOT / "src" / "app" / route / "page.tsx").is_file())
+        self.assertTrue((ROOT / "src" / "app" / "labs" / "page.tsx").is_file())
+        self.assertTrue((ROOT / "src" / "app" / "labs" / "[slug]" / "page.tsx").is_file())
         self.assertTrue((ROOT / "src" / "app" / "projetos" / "[slug]" / "page.tsx").is_file())
+
+    def test_labs_catalog_has_all_requested_systems_and_reusable_template(self) -> None:
+        for product in ("MNEMUSA", "THOTH", "LOGOS", "ODIN", "ANUBIS", "HERMES", "ATLAS"):
+            self.assertIn(f'name: "{product}"', self.data)
+        self.assertIn("generateStaticParams", (ROOT / "src" / "app" / "labs" / "[slug]" / "page.tsx").read_text(encoding="utf-8"))
+        for section in ("PROBLEM", "SYSTEM", "ARCHITECTURE", "CURRENT STATE", "ROADMAP", "RELATED SYSTEMS"):
+            self.assertIn(section, self.product_template)
+        self.assertIn("Sigil", self.product_card)
+
+    def test_work_filters_and_dark_design_tokens_are_present(self) -> None:
+        projects_page = (ROOT / "src" / "app" / "projetos" / "page.tsx").read_text(encoding="utf-8")
+        filters = (ROOT / "src" / "components" / "site" / "ProjectsBrowser.tsx").read_text(encoding="utf-8")
+        for label in ("PRODUCT", "ENGINEERING", "R&D", "OPEN SOURCE"):
+            self.assertIn(label, filters)
+        self.assertIn("ProjectsBrowser", projects_page)
+        for token in ("--bg:", "--surface:", "--border:", "--text-primary:", "--accent:", "--success:", "--warning:"):
+            self.assertIn(token, self.css)
 
     def test_repositioning_and_required_projects_are_present(self) -> None:
         for phrase in (
@@ -29,7 +50,7 @@ class PublicSiteTests(unittest.TestCase):
             "Hermes Agent",
             "Atlas Nano Agent · ANA",
             "Hermes Office Next",
-            "https://pj.azlo.com.br",
+            "https://logos-med.azlo.com.br",
         ):
             self.assertIn(phrase, self.data)
         self.assertNotIn("Bots e agentes personalizados", self.data)

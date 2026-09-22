@@ -1,9 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { navigation } from "@/data/site";
 import { ArrowUpRightIcon } from "./Icons";
 import { MobileNav } from "./MobileNav";
 
 export function SiteHeader() {
+  const pathname = usePathname();
   return (
     <header className="site-header">
       <div className="site-frame site-header__inner">
@@ -12,7 +16,11 @@ export function SiteHeader() {
           <span>AZLO</span>
         </Link>
         <nav className="site-nav" aria-label="Navegação principal">
-          {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+          {navigation.map((item) => {
+            const base = item.href.split("#")[0];
+            const active = base === "/" ? pathname === "/" : pathname.startsWith(base);
+            return <Link key={item.href} href={item.href} className={active ? "is-active" : undefined} aria-current={active ? "page" : undefined}>{item.label}</Link>;
+          })}
         </nav>
         <Link className="header-contact" href="/contato">
           Descrever um problema <ArrowUpRightIcon />
