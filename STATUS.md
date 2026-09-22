@@ -20,7 +20,7 @@ Transformar o site institucional da AZLO em uma organização de engenharia com 
 - Hierarquia pública consolidada para `ATLAS / ANA`, `HERMES / AGENT` e `HERMES / OFFICE`.
 - `/sobre/` mantém a equipe atual em primeiro plano e substitui pseudo-vagas por uma nota de expansão seletiva.
 - `/contato/` ganhou formulário local que prepara uma mensagem `mailto:` sem backend, armazenamento ou coleta automática.
-- Redirects de compatibilidade adicionados para `/engineering/* → /servicos/*` e `/work/* → /projetos/*`.
+- As URLs antigas `/servicos/` e `/projetos/` permanecem canônicas para Engineering e Work, sem criar aliases que o export estático não consiga servir como redirect HTTP.
 - Sitemap estático e gerado, manifest e metadata permanecem alinhados ao domínio `azlo.com.br`.
 - Registro do estado anterior preservado em `docs/audits/2026-09-22-pre-reform.md`.
 
