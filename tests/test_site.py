@@ -15,6 +15,7 @@ class PublicSiteTests(unittest.TestCase):
         self.project_card = (ROOT / "src" / "components" / "site" / "ProjectCard.tsx").read_text(encoding="utf-8")
         self.product_card = (ROOT / "src" / "components" / "site" / "ProductCard.tsx").read_text(encoding="utf-8")
         self.product_template = (ROOT / "src" / "components" / "site" / "ProductTemplate.tsx").read_text(encoding="utf-8")
+        self.problem_form = (ROOT / "src" / "components" / "site" / "ProblemForm.tsx").read_text(encoding="utf-8")
         self.team_card = (ROOT / "src" / "components" / "site" / "TeamCard.tsx").read_text(encoding="utf-8")
         self.css = (ROOT / "src" / "app" / "globals.css").read_text(encoding="utf-8")
 
@@ -47,29 +48,32 @@ class PublicSiteTests(unittest.TestCase):
             "Sistemas clínicos que travam a operação",
             "Conhecimento disperso e decisões lentas",
             "LogosMed",
-            "Hermes Agent",
-            "Atlas Nano Agent · ANA",
-            "Hermes Office Next",
+            "HERMES / AGENT",
+            "ATLAS / ANA",
+            "HERMES / OFFICE",
             "https://logos-med.azlo.com.br",
         ):
             self.assertIn(phrase, self.data)
         self.assertNotIn("Bots e agentes personalizados", self.data)
 
     def test_projects_have_real_case_destinations(self) -> None:
-        self.assertIn("Ler caso", self.project_card)
+        self.assertIn("Ver trabalho", self.project_card)
         self.assertNotIn("Ver contexto", self.project_card)
         self.assertIn("/projetos/${project.slug}", self.project_card)
+        self.assertIn("CURRENT STATE", self.project_card)
         self.assertIn("generateStaticParams", (ROOT / "src" / "app" / "projetos" / "[slug]" / "page.tsx").read_text(encoding="utf-8"))
 
-    def test_team_has_current_and_future_roles_without_fake_names(self) -> None:
-        for name in ("Gabriel Lorençato", "Karson Godinho", "Alan Lima", "Product Manager", "Backend Developer", "Frontend / UI/UX"):
+    def test_team_has_current_members_and_no_pseudo_vacancies(self) -> None:
+        for name in ("Gabriel Lorençato", "Karson Godinho", "Alan Lima"):
             self.assertIn(name, self.data)
-        for fake_name in ("Fulana", "Ciclano", "Beltrano"):
+        for fake_name in ("Fulana", "Ciclano", "Beltrano", "Product Manager", "Backend Developer", "Frontend / UI/UX"):
             self.assertNotIn(fake_name, self.data)
-        self.assertEqual(self.data.count("future: true"), 3)
+        self.assertNotIn("future: true", self.data)
+        about_page = (ROOT / "src" / "app" / "sobre" / "page.tsx").read_text(encoding="utf-8")
+        self.assertIn("BUILDING THE TEAM", about_page)
+        self.assertIn("Não há vagas abertas", about_page)
         self.assertIn('target="_blank"', self.team_card)
         self.assertIn('rel="noreferrer"', self.team_card)
-        self.assertIn("Posição em discussão", self.team_card)
 
     def test_navigation_keyboard_enhancement_and_fallback(self) -> None:
         self.assertIn("<details", self.mobile_nav)
@@ -101,6 +105,15 @@ class PublicSiteTests(unittest.TestCase):
         self.assertNotIn("Technology applied with method", (ROOT / "src" / "components" / "site" / "SiteFooter.tsx").read_text(encoding="utf-8"))
         for status in ("CLOSED BETA", "OPEN SOURCE", "R&D", "MVP EM REVISÃO"):
             self.assertIn(status, self.data)
+
+    def test_second_pass_keeps_semantic_architecture_and_contact_flow(self) -> None:
+        self.assertIn('href="/contato"', self.home)
+        self.assertIn("Descrever um problema", self.home)
+        self.assertIn("OPERATION → SIGNAL → CONTEXT → INTERVENTION → FEEDBACK", self.home)
+        for field in ("name=\"name\"", "name=\"organization\"", "name=\"email\"", "name=\"current\"", "name=\"friction\"", "name=\"outcome\"", "name=\"stack\""):
+            self.assertIn(field, self.problem_form)
+        self.assertIn("mailto:", self.problem_form)
+        self.assertIn("Não envie dados clínicos identificáveis", self.problem_form)
 
     def test_no_stale_positioning_in_public_metadata_sources(self) -> None:
         manifest = (ROOT / "public" / "site.webmanifest").read_text(encoding="utf-8")

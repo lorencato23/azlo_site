@@ -29,6 +29,9 @@ class ProjectStructureTests(unittest.TestCase):
         self.assertIn("trailingSlash: true", next_config)
         self.assertEqual(vercel["framework"], "nextjs")
         self.assertTrue(vercel["headers"])
+        redirect_pairs = {(item["source"], item["destination"]) for item in vercel["redirects"] if "has" not in item}
+        self.assertIn(("/engineering/:path*", "/servicos/:path*"), redirect_pairs)
+        self.assertIn(("/work/:path*", "/projetos/:path*"), redirect_pairs)
 
     def test_public_assets_only_contain_approved_brand_rasters(self) -> None:
         public_logos = ROOT / "public" / "logos"

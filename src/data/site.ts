@@ -59,7 +59,6 @@ export type TeamMember = {
   expertise: string[];
   initials: string;
   linkedin?: string;
-  future?: boolean;
 };
 
 export const site = {
@@ -239,7 +238,7 @@ export const projects: Project[] = [
     category: "OPEN SOURCE",
     workType: "OPEN SOURCE",
     status: "OPEN SOURCE",
-    title: "Hermes Agent",
+    title: "HERMES / AGENT",
     summary: "Otimização documentada de busca de sessões FTS5 em um fork do Hermes Agent.",
     tags: ["FTS5", "Paginação", "Equivalência", "Testes"],
     caseStudy: {
@@ -255,8 +254,8 @@ export const projects: Project[] = [
     category: "R&D",
     workType: "R&D",
     status: "R&D",
-    title: "ATLAS / NANO AGENT",
-    summary: "Harness local para transformar sinais de Linux em investigação, plano assistido e trilha de auditoria.",
+    title: "ATLAS / ANA",
+    summary: "Atlas Nano Agent: harness local para transformar sinais de Linux em investigação, plano assistido e trilha de auditoria.",
     tags: ["Linux", "Incidentes", "Auditoria", "Ações assistidas"],
     featured: true,
     caseStudy: {
@@ -273,7 +272,7 @@ export const projects: Project[] = [
     category: "ENGINEERING",
     workType: "ENGINEERING",
     status: "MVP EM REVISÃO",
-    title: "HERMES OFFICE NEXT",
+    title: "HERMES / OFFICE",
     summary: "Assistência de IA para documentos reais, com contexto autorizado, diff e aprovação antes da aplicação.",
     tags: ["LibreOffice", "Contexto autorizado", "Diff", "Cópia preservada"],
     caseStudy: {
@@ -308,12 +307,6 @@ export const currentTeam: TeamMember[] = [
     initials: "AL",
     linkedin: "https://www.linkedin.com/in/alan-lima-7568451a5",
   },
-];
-
-export const futureRoles: TeamMember[] = [
-  { name: "Product Manager", role: "Posição em discussão", expertise: ["Product Strategy", "Discovery", "Roadmap & Delivery"], initials: "PM", future: true },
-  { name: "Backend Developer", role: "Posição em discussão", expertise: ["APIs", "Backend Architecture", "Integrations & Automation"], initials: "BE", future: true },
-  { name: "Frontend / UI/UX", role: "Posição em discussão", expertise: ["Frontend Engineering", "Product UI", "Design Systems"], initials: "UX", future: true },
 ];
 
 export const method = [

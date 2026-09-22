@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function LabsPage() {
   return (
     <main id="main" className="labs-page">
-      <section className="page-hero page-hero--dark"><div className="page-hero__grid" aria-hidden="true" /><div className="site-frame"><p className="breadcrumb mono-label">AZLO / LABS</p><p className="eyebrow eyebrow--light"><span />PRODUCT SYSTEMS</p><h1>Sistemas experimentais para conhecimento, agentes e <em>infraestrutura.</em></h1><p>Labs reúne produtos próprios, sistemas experimentais, R&amp;D e ferramentas internas que amadureceram dentro da AZLO — open source quando aplicável.</p></div></section>
+      <section className="page-hero page-hero--dark"><div className="page-hero__grid" aria-hidden="true" /><div className="site-frame"><p className="breadcrumb mono-label">AZLO / LABS</p><p className="eyebrow eyebrow--light"><span />PRODUCT SYSTEMS</p><h1>Systems for human reasoning and <em>operation.</em></h1><p>Produtos e sistemas experimentais para conhecimento, agentes, aprendizado e infraestrutura, desenvolvidos dentro da AZLO.</p></div></section>
       <section className="section section--light"><div className="site-frame"><div className="section-heading section-heading--split"><div><p className="eyebrow"><span />PRODUCT MATRIX</p><h2>Uma linguagem comum para sistemas em <em>evolução.</em></h2></div><p>Cada item mostra seu domínio, estágio e limite. Nomes de produto continuam subordinados à marca AZLO.</p></div><div className="labs-matrix">{products.map((product) => <ProductCard key={product.slug} product={product} />)}</div></div></section>
     </main>
   );

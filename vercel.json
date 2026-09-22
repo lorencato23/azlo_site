@@ -3,6 +3,16 @@
   "framework": "nextjs",
   "redirects": [
     {
+      "source": "/engineering/:path*",
+      "destination": "/servicos/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/work/:path*",
+      "destination": "/projetos/:path*",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {

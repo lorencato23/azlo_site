@@ -13,7 +13,7 @@ export default function Home() {
             <p className="eyebrow eyebrow--light"><span />AZLO · SYSTEMS ENGINEERING</p>
             <h1>Engenharia para sistemas que precisam <em>funcionar no mundo real.</em></h1>
             <p className="hero__lead">Entramos onde processo, dados e ambiente técnico precisam voltar a trabalhar juntos.</p>
-            <div className="hero__actions"><Link className="button button--primary" href="/servicos">Explorar Engineering <ArrowRightIcon /></Link><Link className="button button--secondary" href="/labs">Explorar Labs <ArrowRightIcon /></Link></div>
+            <div className="hero__actions"><Link className="button button--primary" href="/contato">Descrever um problema <ArrowRightIcon /></Link><Link className="button button--secondary" href="/labs">Explorar Labs <ArrowRightIcon /></Link></div>
             <p className="hero__proof">SYSTEMS · AI · INFRASTRUCTURE · AUTOMATION</p>
           </div>
           <SystemTopology />
@@ -23,7 +23,7 @@ export default function Home() {
       <section className="section topology-section">
         <div className="site-frame">
           <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />OPERATION TOPOLOGY</p><h2>Contexto antes de <em>ferramenta.</em></h2></div><p>Uma operação deixa sinais. A engenharia organiza contexto antes de escolher a intervenção.</p></div>
-          <ol className="topology-rail"><li><span>01</span><strong>OPERAÇÃO</strong><small>Pessoas, rotinas, restrições</small></li><li><span>02</span><strong>SINAIS</strong><small>Dados, falhas, atrito</small></li><li className="is-active"><span>03</span><strong>CONTEXTO</strong><small>Fluxo, acesso, prioridade</small></li><li><span>04</span><strong>INTERVENÇÃO</strong><small>IA, software, infraestrutura</small></li><li><span>05</span><strong>FEEDBACK</strong><small>Operação mais clara</small></li></ol>
+          <div className="topology-diagram"><p className="topology-diagram__flow mono-label">OPERATION → SIGNAL → CONTEXT → INTERVENTION → FEEDBACK</p><ol className="topology-rail"><li><span>01</span><strong>OPERAÇÃO</strong><small>Pessoas, rotinas, restrições</small></li><li><span>02</span><strong>SINAIS</strong><small>Dados, falhas, atrito</small></li><li className="is-active"><span>03</span><strong>CONTEXTO</strong><small>Fluxo, acesso, prioridade</small></li><li><span>04</span><strong>INTERVENÇÃO</strong><small>IA, software, infraestrutura</small></li><li><span>05</span><strong>FEEDBACK</strong><small>Operação mais clara</small></li></ol></div>
         </div>
       </section>
 
@@ -36,8 +36,9 @@ export default function Home() {
 
       <section className="section labs-section" id="labs">
         <div className="site-frame">
-          <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />AZLO / LABS</p><h2>Sistemas experimentais para conhecimento, agentes e <em>infraestrutura.</em></h2></div><p>Produtos próprios, sistemas experimentais, R&amp;D e ferramentas que amadurecem dentro da mesma organização de engenharia.</p></div>
+          <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />AZLO / LABS</p><h2>Systems for human reasoning and <em>operation.</em></h2></div><p>Produtos e sistemas experimentais para conhecimento, agentes, aprendizado e infraestrutura, desenvolvidos dentro da AZLO.</p></div>
           <div className="labs-grid">{products.map((product) => <ProductCard key={product.slug} product={product} featured={product.slug === "mnemusa"} />)}</div>
+          <p className="labs-grid__hint mono-label">Deslize para explorar os sistemas <span aria-hidden="true">→</span></p>
           <Link className="section-link" href="/labs">Abrir matriz de produtos <ArrowRightIcon /></Link>
         </div>
       </section>

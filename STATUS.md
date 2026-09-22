@@ -1,40 +1,51 @@
 # Status — AZLO site
 
-State: ACTIVE — REFORMA ENGINEERING / LABS EM VALIDAÇÃO LOCAL
+State: ACTIVE — CONSOLIDAÇÃO ENGINEERING / LABS EM VALIDAÇÃO E PUBLICAÇÃO
 
 ## Objetivo
 
 Transformar o site institucional da AZLO em uma organização de engenharia com duas faces complementares: AZLO / Engineering e AZLO / Labs, preservando identidade, URLs e o conteúdo público verificável.
 
-## Reforma implementada
+## Reforma consolidada
 
-- Home reorganizada em hero, operation topology, Engineering, Labs, Work, método, equipe e contato.
+- Home organizada em hero, operation topology conectada, Engineering, Labs, Work, método, equipe e contato.
+- CTA principal do hero direciona para `Descrever um problema`; Labs permanece como exploração secundária.
 - Linguagem visual dark-first com tokens de superfície, borda, texto, accent, estados e motion.
-- Topologia abstrata de sistema e sete sigils SVG/CSS compartilhando a mesma gramática geométrica.
-- `/labs/` criado com matriz de produtos e `/labs/<slug>/` criado com template reutilizável.
+- Topologia operacional com fluxo explícito `OPERATION → SIGNAL → CONTEXT → INTERVENTION → FEEDBACK`, incluindo recomposição vertical no mobile.
+- Sete sigils SVG compartilhando a mesma gramática geométrica.
+- `/labs/` criado com matriz de produtos e `/labs/<slug>/` com template reutilizável.
 - Logos formalizado como `LOGOS`; a vertical médica pública aparece como `LOGOS / MED`.
 - Odin aparece como `ODIN`; o nome técnico Odintool permanece apenas na descrição de proveniência.
-- `/projetos/` ganhou filtros funcionais para PRODUCT, ENGINEERING, R&D e OPEN SOURCE.
-- Engineering, Company, método, equipe atual e posições futuras foram reestruturados sem nomes fictícios.
-- Sitemap estático e gerado, manifest e metadata foram atualizados para Labs e produtos.
+- Work distingue produtos, Engineering, R&D e Open Source, com contexto e estado atual nos cards.
+- Hierarquia pública consolidada para `ATLAS / ANA`, `HERMES / AGENT` e `HERMES / OFFICE`.
+- `/sobre/` mantém a equipe atual em primeiro plano e substitui pseudo-vagas por uma nota de expansão seletiva.
+- `/contato/` ganhou formulário local que prepara uma mensagem `mailto:` sem backend, armazenamento ou coleta automática.
+- Redirects de compatibilidade adicionados para `/engineering/* → /servicos/*` e `/work/* → /projetos/*`.
+- Sitemap estático e gerado, manifest e metadata permanecem alinhados ao domínio `azlo.com.br`.
 - Registro do estado anterior preservado em `docs/audits/2026-09-22-pre-reform.md`.
+
+## Auditoria de produção
+
+- Produção em `https://azlo.com.br` foi reaberta antes da edição.
+- HTML inicial contém a arquitetura semântica: Engineering, Labs, MNEMUSA, THOTH, LOGOS, ODIN, ANUBIS, HERMES e ATLAS.
+- Rotas públicas, canonical, sitemap, robots, headers e console foram verificados.
+- O deployment publicado correspondeu ao conteúdo novo; o fetch externo com navegação antiga foi classificado como snapshot/cache anterior, não como ausência de SSR.
+- O HTML entregue contém o conteúdo essencial sem depender de interação client-side.
 
 ## Validação local
 
 - `npm run lint`: passou.
 - `npx tsc --noEmit`: passou.
-- `python3 -m unittest discover -s tests -v`: 16 testes passaram.
+- `python3 -m unittest discover -s tests -v`: 19 testes passaram.
 - `npm run build`: passou; 21 páginas estáticas geradas.
-- Servidor local `npm run dev -- --hostname 127.0.0.1` respondeu HTTP 200.
-- QA browser com Chromium do sistema: rotas públicas, uma rota de produto, uma rota de case, overflow desktop/mobile, H1 dentro do viewport, console/page errors e foco do menu mobile passaram.
-- Auditoria visual desktop/mobile executada sobre screenshots locais.
+- QA browser com Chromium do sistema: rotas públicas, overflow desktop/mobile, H1 dentro do viewport, console/page errors e foco do menu mobile passaram.
+- QA do formulário de contato: validação nativa, campos obrigatórios, overflow mobile e console passaram.
+- HTML server-rendered local: arquitetura essencial e campos do formulário presentes no export.
+- Auditoria visual desktop/mobile executada sobre screenshots da versão consolidada.
 
-## Gate antes de produção
+## Deploy
 
-1. Revalidar conteúdo/status dos produtos com aprovação humana antes da publicação.
-2. Conferir o domínio e o deploy de produção em `https://azlo.com.br`.
-3. Fazer revisão humana final de copy, contraste percebido e ordem de navegação.
-4. Só então enviar a branch ao GitHub e publicar.
+A versão publicada anteriormente continua em produção enquanto esta segunda passada aguarda novo deploy explícito. O commit da consolidação deve ser criado antes da publicação para preservar rollback e rastreabilidade.
 
 ## Não fazer
 

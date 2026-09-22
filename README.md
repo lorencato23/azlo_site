@@ -34,8 +34,8 @@ docs/audits/           # registros locais de estado e decisões de reforma
 - `/labs/<slug>/` — template reutilizável de produto
 - `/projetos/` — Work com filtros Product, Engineering, R&D e Open Source
 - `/projetos/<slug>/` — cases com contexto, intervenção, arquitetura e estado
-- `/sobre/` — método, equipe atual e posições futuras em discussão
-- `/contato/` — conversa por e-mail e limites de segurança
+- `/sobre/` — método, equipe atual e expansão seletiva da capacidade
+- `/contato/` — formulário local e conversa por e-mail, com limites de segurança
 
 ## Desenvolvimento e verificação
 
