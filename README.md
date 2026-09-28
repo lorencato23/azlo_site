@@ -1,6 +1,6 @@
 # AZLO
 
-Site institucional da AZLO: uma organização de engenharia que projeta sistemas para operações reais e constrói instrumentos próprios em Labs.
+Site institucional da AZLO: engenharia de sistemas, IA, software, infraestrutura e automação para operações reais; Labs reúne produtos próprios e pesquisa.
 
 ## Arquitetura de marca
 
@@ -20,7 +20,7 @@ Site institucional da AZLO: uma organização de engenharia que projeta sistemas
 
 ```text
 src/
-  app/                 # home, Engineering, Labs, Work, Company e rotas de produto/case
+  app/                 # home, Engenharia, Labs, Projetos, Sobre e rotas de produto/case
   components/site/     # shell, navegação, sigils, cards, filtros e templates
   data/site.ts         # fonte única de marca, serviços, produtos, projetos e equipe
 docs/audits/           # registros locais de estado e decisões de reforma
@@ -32,7 +32,7 @@ docs/audits/           # registros locais de estado e decisões de reforma
 - `/servicos/` — módulos AZLO / Engineering
 - `/labs/` — matriz de produtos próprios e sistemas experimentais
 - `/labs/<slug>/` — template reutilizável de produto
-- `/projetos/` — Work com filtros Product, Engineering, R&D e Open Source
+- `/projetos/` — projetos com filtros de Produto, Engenharia, P&D e Código aberto
 - `/projetos/<slug>/` — cases com contexto, intervenção, arquitetura e estado
 - `/sobre/` — método, equipe atual e expansão seletiva da capacidade
 - `/contato/` — formulário local e conversa por e-mail, com limites de segurança
@@ -47,7 +47,7 @@ npm run build
 python3 -m unittest discover -s tests -v
 ```
 
-O projeto usa `output: "export"` em `next.config.mjs`. A Vercel executa `npm run build` e publica a saída estática. Para inspecionar o export localmente, use:
+O projeto usa `output: "export"` em `next.config.mjs`. A Vercel executa `npm run build` e publica a saída estática. Para recriar favicons e a imagem social a partir dos rasters aprovados e do template editável `scripts/og-image-template.svg`, execute `npm run generate-assets`. Para inspecionar o export localmente, use:
 
 ```bash
 python3 -m http.server 3100 --directory out
@@ -57,13 +57,13 @@ python3 -m http.server 3100 --directory out
 
 ## Conteúdo, status e proveniência
 
-`src/data/site.ts` é a fonte de verdade para conteúdo público. Cada projeto e produto precisa ter descrição factual, domínio e estado explicitamente delimitados. Versões e milestones só aparecem quando existem no material operacional verificado; o restante é marcado como sem versão pública, incubating ou concept.
+`src/data/site.ts` é a fonte de verdade para conteúdo público. Cada projeto e produto precisa ter descrição factual, domínio e estado explicitamente delimitados. Rótulos internos de estado são convertidos em português na interface. Versões e marcos só aparecem quando confirmados nos projetos de origem; trabalho experimental local não é apresentado como versão publicada.
 
 O contato usa `mailto:` e cópia local do e-mail; não há coleta ou armazenamento de formulário no site.
 
 ## Identidade visual
 
-A interface é dark-first, com superfícies midnight navy, bordas técnicas, grids sutis, azul frio como sinal e verde apenas para estados operacionais positivos. SVG/CSS são usados para topologia e sigils; não há imagens stock, partículas, fake terminal ou efeitos globais.
+A interface é dark-first, com superfícies midnight navy, bordas técnicas, grids sutis e azul frio como sinal. Verde fica reservado a estados operacionais verificados; diagramas conceituais não simulam telemetria. SVG/CSS são usados para topologia e sigils; não há imagens stock, partículas ou fake terminal.
 
 Os tokens principais vivem em `src/app/globals.css` e são espelhados em `tailwind.config.ts`: `bg`, `surface`, `surfaceElevated`, `border`, `textPrimary`, `textSecondary`, `textMuted`, `accent`, `success`, `warning`, espaçamento, raios e durações.
 

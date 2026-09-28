@@ -6,7 +6,6 @@ export function TeamCard({ member }: { member: TeamMember }) {
     <article className="team-card">
       <div className="team-card__photo" aria-label={`Placeholder de foto para ${member.name}`}>
         <span>{member.initials}</span>
-        <i aria-hidden="true" />
       </div>
       <div className="team-card__identity">
         <p>Equipe atual</p>

@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { caseStudyProjects, products, site } from "@/data/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const updated = new Date("2026-09-22T00:00:00-03:00");
   const routes = ["", "/servicos", "/labs", "/projetos", "/sobre", "/contato"];

@@ -30,7 +30,7 @@ class PublicSiteTests(unittest.TestCase):
         for product in ("MNEMUSA", "THOTH", "LOGOS", "ODIN", "ANUBIS", "HERMES", "ATLAS"):
             self.assertIn(f'name: "{product}"', self.data)
         self.assertIn("generateStaticParams", (ROOT / "src" / "app" / "labs" / "[slug]" / "page.tsx").read_text(encoding="utf-8"))
-        for section in ("PROBLEM", "SYSTEM", "ARCHITECTURE", "CURRENT STATE", "ROADMAP", "RELATED SYSTEMS"):
+        for section in ("PROBLEMA", "SISTEMA", "ARQUITETURA", "ESTADO ATUAL", "PRÓXIMOS PASSOS", "SISTEMAS RELACIONADOS"):
             self.assertIn(section, self.product_template)
         self.assertIn("Sigil", self.product_card)
 
@@ -60,7 +60,7 @@ class PublicSiteTests(unittest.TestCase):
         self.assertIn("Ver trabalho", self.project_card)
         self.assertNotIn("Ver contexto", self.project_card)
         self.assertIn("/projetos/${project.slug}", self.project_card)
-        self.assertIn("CURRENT STATE", self.project_card)
+        self.assertIn("SITUAÇÃO ATUAL", self.project_card)
         self.assertIn("generateStaticParams", (ROOT / "src" / "app" / "projetos" / "[slug]" / "page.tsx").read_text(encoding="utf-8"))
 
     def test_team_has_current_members_and_no_pseudo_vacancies(self) -> None:
@@ -70,7 +70,7 @@ class PublicSiteTests(unittest.TestCase):
             self.assertNotIn(fake_name, self.data)
         self.assertNotIn("future: true", self.data)
         about_page = (ROOT / "src" / "app" / "sobre" / "page.tsx").read_text(encoding="utf-8")
-        self.assertIn("BUILDING THE TEAM", about_page)
+        self.assertIn("EXPANSÃO DA EQUIPE", about_page)
         self.assertIn("Não há vagas abertas", about_page)
         self.assertIn('target="_blank"', self.team_card)
         self.assertIn('rel="noreferrer"', self.team_card)
@@ -103,13 +103,40 @@ class PublicSiteTests(unittest.TestCase):
     def test_status_and_language_are_consistent(self) -> None:
         self.assertNotIn("Expanding the team", self.home + self.data)
         self.assertNotIn("Technology applied with method", (ROOT / "src" / "components" / "site" / "SiteFooter.tsx").read_text(encoding="utf-8"))
-        for status in ("CLOSED BETA", "OPEN SOURCE", "R&D", "MVP EM REVISÃO"):
-            self.assertIn(status, self.data)
+        for label in ("TODOS", "PRODUTO", "ENGENHARIA", "P&D", "CÓDIGO ABERTO"):
+            self.assertIn(label, (ROOT / "src" / "components" / "site" / "ProjectsBrowser.tsx").read_text(encoding="utf-8"))
+        self.assertIn("BETA FECHADA", self.data)
+        self.assertIn("EM INCUBAÇÃO", self.data)
+        self.assertIn("CANDIDATO A LANÇAMENTO", self.data)
+        self.assertIn("P&D operacional", self.data)
+        self.assertNotIn("R&D operacional", self.data)
+        for label in ("ENTENDER", "DESENHAR", "CONSTRUIR", "OPERAR"):
+            self.assertIn(f'label: "{label}"', self.data)
+
+    def test_mnemusa_and_hermoffice_public_statuses_match_current_sources(self) -> None:
+        self.assertIn('version: "v0.10.0"', self.data)
+        self.assertIn("v0.10.0 conclui o roadmap principal", self.data)
+        self.assertIn("sem licença definida", self.data)
+        self.assertIn('status: "RELEASE CANDIDATE"', self.data)
+        self.assertIn("1.0.0-rc.1", self.data)
+
+    def test_concept_diagram_does_not_claim_live_system_status(self) -> None:
+        self.assertNotIn("ONLINE", self.home)
+        self.assertNotIn("ROUTES 05", self.home)
+        self.assertIn("MAPA CONCEITUAL", self.home)
+        self.assertIn("SEM TELEMETRIA", self.home)
+
+    def test_social_preview_uses_current_positioning(self) -> None:
+        og_source = (ROOT / "scripts" / "og-image-template.svg").read_text(encoding="utf-8")
+        self.assertIn("Engenharia de sistemas", og_source)
+        self.assertIn("Engineering + Labs", og_source)
+        self.assertNotIn("Ideias que ganham forma", og_source)
+        self.assertIn("og-image.png", self.layout)
 
     def test_second_pass_keeps_semantic_architecture_and_contact_flow(self) -> None:
         self.assertIn('href="/contato"', self.home)
         self.assertIn("Descrever um problema", self.home)
-        self.assertIn("OPERATION → SIGNAL → CONTEXT → INTERVENTION → FEEDBACK", self.home)
+        self.assertIn("OPERAÇÃO → SINAL → CONTEXTO → INTERVENÇÃO → RETORNO", self.home)
         for field in ("name=\"name\"", "name=\"organization\"", "name=\"email\"", "name=\"current\"", "name=\"friction\"", "name=\"outcome\"", "name=\"stack\""):
             self.assertIn(field, self.problem_form)
         self.assertIn("mailto:", self.problem_form)

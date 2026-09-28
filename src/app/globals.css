@@ -91,8 +91,7 @@ h1 em, h2 em, h3 em { color: var(--accent); font-style: normal; }
 
 .system-topology { position: relative; overflow: hidden; border: 1px solid var(--border-strong); background: rgba(10,19,29,0.74); }
 .system-topology__header, .system-topology__footer { display: flex; min-height: 3.2rem; padding-inline: 1rem; border-bottom: 1px solid var(--border); align-items: center; justify-content: space-between; color: var(--text-muted); }
-.system-topology__status { display: flex; align-items: center; gap: 0.45rem; color: var(--success); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.09em; }
-.system-topology__status i, .status-dot { width: 0.42rem; height: 0.42rem; border-radius: 50%; background: currentColor; box-shadow: 0 0 0.7rem currentColor; }
+
 .system-topology svg { display: block; width: 100%; min-height: 24rem; background-image: linear-gradient(rgba(114,199,232,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(114,199,232,0.045) 1px, transparent 1px); background-size: 3rem 3rem; }
 .system-topology svg path { fill: none; stroke: rgba(114,199,232,0.5); stroke-dasharray: 4 8; stroke-width: 1; }
 .system-topology svg circle { fill: var(--bg); stroke: var(--accent); stroke-width: 1.2; }
@@ -148,7 +147,7 @@ h1 em, h2 em, h3 em { color: var(--accent); font-style: normal; }
 .labs-section, .labs-page { background: var(--surface); }
 .labs-grid { display: flex; overflow-x: auto; padding-bottom: 0.75rem; gap: 0.75rem; scrollbar-color: var(--border-strong) transparent; }
 .labs-grid .product-card { min-width: min(25rem, 68vw); flex: 0 0 min(25rem, 68vw); }
-.labs-grid__hint { display: none; margin-top: 0.8rem; color: var(--text-muted); }
+.labs-grid__hint { display: block; margin-top: 0.8rem; color: var(--text-muted); }
 .labs-matrix { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
 .labs-matrix .product-card:last-child { grid-column: 2; }
 .product-card { display: flex; min-height: 25.5rem; padding: 1.35rem; border: 1px solid var(--border); background: var(--surface-elevated); flex-direction: column; transition: border-color 220ms ease, background 220ms ease, transform 220ms var(--ease); }
@@ -235,7 +234,7 @@ h1 em, h2 em, h3 em { color: var(--accent); font-style: normal; }
 .project-filters button:first-child { border-left: 1px solid #c3d4da; }
 .project-filters button:hover, .project-filters button.is-active { background: #10202c; color: var(--accent-soft); }
 .project-filter-status { display: flex; margin-top: 1rem; align-items: center; gap: 0.5rem; color: #5c7481; font-family: var(--mono); font-size: 0.6rem; text-transform: uppercase; }
-.project-filter-status .status-dot { color: #278d70; box-shadow: none; }
+
 .project-list { display: grid; margin-top: 1.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
 .work-card { display: flex; min-height: 25rem; padding: 1.35rem; border: 1px solid #c3d4da; background: #f6fbfc; flex-direction: column; transition: border-color 180ms ease, transform 180ms var(--ease); }
 .work-card:hover { border-color: #287b9f; transform: translateY(-2px); }
@@ -323,12 +322,11 @@ h1 em, h2 em, h3 em { color: var(--accent); font-style: normal; }
 
 .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
 .team-card { display: flex; min-height: 24rem; padding: 1.15rem; border: 1px solid var(--border); background: var(--surface-elevated); flex-direction: column; }
-.team-card--future { border-style: dashed; background: transparent; }
+
 .team-card__photo { position: relative; display: grid; min-height: 8.5rem; overflow: hidden; background: #0c2635; place-items: center; }
 .team-card__photo::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(114,199,232,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(114,199,232,0.08) 1px, transparent 1px); background-size: 2.5rem 2.5rem; content: ""; }
 .team-card__photo span { position: relative; z-index: 1; display: grid; width: 4.3rem; height: 4.3rem; border: 1px solid var(--accent); color: var(--accent-soft); font-size: 1.25rem; place-items: center; }
-.team-card__photo i { position: absolute; right: 0.8rem; bottom: 0.8rem; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--success); box-shadow: 0 0 0.6rem var(--success); }
-.team-card--future .team-card__photo i { background: var(--text-muted); box-shadow: none; }
+
 .team-card__identity { padding-top: 1.2rem; }
 .team-card__identity p { color: var(--accent); font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .team-card__identity h3 { margin-top: 0.55rem; font-size: 1.6rem; line-height: 1; }

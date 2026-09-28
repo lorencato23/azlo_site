@@ -10,23 +10,24 @@ export function SiteFooter() {
             <img src="/logos/azlo-symbol-real-white.png" width="350" height="355" alt="" />
             <span>AZLO</span>
           </Link>
-          <p>ENGINEERING FOR SYSTEMS THAT NEED TO OPERATE.</p>
-          <strong>Intelligence requires infrastructure.</strong>
+          <p>ENGENHARIA PARA SISTEMAS QUE PRECISAM OPERAR.</p>
+          <strong>Inteligência exige infraestrutura.</strong>
         </div>
         <div className="site-footer__column">
-          <p className="mono-label">ENGINEERING</p>
-          <Link href="/servicos">Systems & health</Link>
-          <Link href="/servicos">AI & knowledge</Link>
-          <Link href="/servicos">Infrastructure & data</Link>
-          <Link href="/servicos">Automation</Link>
+          <p className="mono-label">ENGENHARIA</p>
+          <Link href="/servicos">Sistemas & saúde</Link>
+          <Link href="/servicos">IA & conhecimento</Link>
+          <Link href="/servicos">Infraestrutura & dados</Link>
+          <Link href="/servicos">Automação</Link>
         </div>
         <div className="site-footer__column">
           <p className="mono-label">LABS</p>
           {products.map((product) => <Link key={product.slug} href={`/labs/${product.slug}`}>AZLO / {product.name}</Link>)}
         </div>
         <div className="site-footer__column">
-          <p className="mono-label">COMPANY</p>
+          <p className="mono-label">AZLO</p>
           {navigation.slice(2).map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+          <Link href="/sobre#team">Equipe</Link>
           <a className="site-footer__email" href={`mailto:${site.email}?subject=Conversa%20com%20a%20AZLO`}>{site.email}</a>
         </div>
       </div>

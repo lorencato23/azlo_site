@@ -5,11 +5,11 @@ import type { Project, WorkType } from "@/data/site";
 import { ProjectCard } from "./ProjectCard";
 
 const filters: { value: "ALL" | WorkType; label: string }[] = [
-  { value: "ALL", label: "ALL" },
-  { value: "PRODUCT", label: "PRODUCT" },
-  { value: "ENGINEERING", label: "ENGINEERING" },
-  { value: "R&D", label: "R&D" },
-  { value: "OPEN SOURCE", label: "OPEN SOURCE" },
+  { value: "ALL", label: "TODOS" },
+  { value: "PRODUCT", label: "PRODUTO" },
+  { value: "ENGINEERING", label: "ENGENHARIA" },
+  { value: "R&D", label: "P&D" },
+  { value: "OPEN SOURCE", label: "CÓDIGO ABERTO" },
 ];
 
 export function ProjectsBrowser({ projects }: { projects: Project[] }) {
@@ -20,7 +20,7 @@ export function ProjectsBrowser({ projects }: { projects: Project[] }) {
       <div className="project-filters" role="group" aria-label="Filtrar projetos">
         {filters.map((item) => <button key={item.value} type="button" className={filter === item.value ? "is-active" : ""} aria-pressed={filter === item.value} onClick={() => setFilter(item.value)}>{item.label}</button>)}
       </div>
-      <p className="project-filter-status" aria-live="polite"><span className="status-dot" /> {visible.length} {visible.length === 1 ? "item" : "itens"} em exibição</p>
+      <p className="project-filter-status" aria-live="polite">{visible.length} {visible.length === 1 ? "item" : "itens"} em exibição</p>
       <div className="project-list">
         {visible.map((project) => <ProjectCard key={project.slug} project={project} />)}
       </div>

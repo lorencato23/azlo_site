@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { LabProduct } from "@/data/site";
+import { productStatusLabel, type LabProduct } from "@/data/site";
 import { ArrowRightIcon } from "./Icons";
 import { Sigil } from "./Sigil";
 
@@ -19,9 +19,9 @@ export function ProductCard({ product, featured = false }: ProductCardProps) {
       </div>
       <p className="product-card__description">{product.shortDescription}</p>
       <div className="product-card__meta">
-        <span><b>STATUS</b>{product.status}</span>
-        {product.version ? <span><b>VERSION</b>{product.version}</span> : null}
-        {product.distribution ? <span><b>DISTRIBUTION</b>{product.distribution}</span> : null}
+        <span><b>ESTADO</b>{productStatusLabel(product.status)}</span>
+        {product.version ? <span><b>VERSÃO</b>{product.version}</span> : null}
+        {product.distribution ? <span><b>DISTRIBUIÇÃO</b>{product.distribution === "OPEN SOURCE" ? "CÓDIGO ABERTO" : product.distribution}</span> : null}
       </div>
       <Link className="product-card__link" href={`/labs/${product.slug}`}>
         Explorar sistema <ArrowRightIcon />

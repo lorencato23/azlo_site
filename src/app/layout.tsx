@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "AZLO | Engenharia para operações reais",
     description: site.description,
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "AZLO — engenharia para operações reais." }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "AZLO — engenharia de sistemas para operações reais." }],
     locale: "pt_BR",
   },
   twitter: {
