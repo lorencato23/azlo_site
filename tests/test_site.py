@@ -148,6 +148,14 @@ class PublicSiteTests(unittest.TestCase):
         for stale in ("Ideias que ganham forma", "Alpha Zenith Life Optimization", "fluxos reais"):
             self.assertNotIn(stale, manifest + generator + self.layout)
 
+    def test_readme_and_project_metadata_match_current_release_language(self) -> None:
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        project_page = (ROOT / "src" / "app" / "projetos" / "[slug]" / "page.tsx").read_text(encoding="utf-8")
+        self.assertIn("Next.js 15.5.26", readme)
+        self.assertNotIn("Next.js 14", readme)
+        self.assertIn("${project.title} | Projetos", project_page)
+        self.assertNotIn("${project.title} | Work", project_page)
+
 
 if __name__ == "__main__":
     unittest.main()

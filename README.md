@@ -10,7 +10,7 @@ Site institucional da AZLO: engenharia de sistemas, IA, software, infraestrutura
 
 ## Stack
 
-- Next.js 14 e React 18
+- Next.js 15.5.26 e React 18
 - TypeScript com App Router
 - CSS global tokenizado em `src/app/globals.css`
 - export estático para `out/`
@@ -28,7 +28,7 @@ docs/audits/           # registros locais de estado e decisões de reforma
 
 ## Páginas públicas
 
-- `/` — posicionamento, topologia, Engineering, Labs, Work, método, equipe e contato
+- `/` — posicionamento, topologia, Engenharia, Labs, Projetos, método, equipe e contato
 - `/servicos/` — módulos AZLO / Engineering
 - `/labs/` — matriz de produtos próprios e sistemas experimentais
 - `/labs/<slug>/` — template reutilizável de produto
