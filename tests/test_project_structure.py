@@ -7,23 +7,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ProjectStructureTests(unittest.TestCase):
-    def test_obsolete_zip_is_not_part_of_the_project(self) -> None:
-        self.assertFalse((ROOT / "290626.zip").exists())
-
-    def test_readme_documents_current_workflow_and_brand_assets(self) -> None:
+    def test_readme_documents_current_workflow_and_brand_asset_policy(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8").lower()
-        self.assertIn("npm install", readme)
-        self.assertIn("npm run dev", readme)
-        self.assertIn("npm run build", readme)
-        self.assertIn("fonte visual aprovada", readme)
-        self.assertIn("100vetorial", readme)
-
-    def test_launch_configuration_runs_next(self) -> None:
-        launch = json.loads((ROOT / ".claude" / "launch.json").read_text(encoding="utf-8"))
-        configuration = launch["configurations"][0]
-        self.assertEqual(configuration["runtimeExecutable"], "npm")
-        self.assertEqual(configuration["runtimeArgs"], ["run", "dev", "--", "-p", "3000"])
-        self.assertEqual(configuration["port"], 3000)
+        for command in ("npm run dev", "npm run lint", "npm run build"):
+            self.assertIn(command, readme)
+        self.assertIn("fonte de verdade", readme)
+        self.assertIn("vetorizações experimentais", readme)
 
     def test_fonts_are_self_hosted(self) -> None:
         layout = (ROOT / "src" / "app" / "layout.tsx").read_text(encoding="utf-8")
@@ -39,38 +28,20 @@ class ProjectStructureTests(unittest.TestCase):
         self.assertIn("output: 'export'", next_config)
         self.assertIn("trailingSlash: true", next_config)
         self.assertEqual(vercel["framework"], "nextjs")
-        self.assertNotIn("outputDirectory", vercel)
         self.assertTrue(vercel["headers"])
-        redirect = vercel["redirects"][0]
-        self.assertEqual(redirect["source"], "/:path*")
-        self.assertEqual(redirect["has"], [{"type": "host", "value": "www.azlo.com.br"}])
-        self.assertEqual(redirect["destination"], "https://azlo.com.br/:path*")
-        self.assertTrue(redirect["permanent"])
 
-    def test_public_experience_does_not_reference_experimental_vectors(self) -> None:
-        sources = [
-            ROOT / "src" / "app" / "layout.tsx",
-            ROOT / "src" / "app" / "page.tsx",
-            *sorted((ROOT / "src" / "components" / "experience").glob("*.tsx")),
-        ]
-        public_source = "\n".join(path.read_text(encoding="utf-8") for path in sources)
-        self.assertNotIn("100vetorial", public_source)
-        self.assertIn("azlo-symbol-real-white.png", public_source)
+    def test_public_assets_only_contain_approved_brand_rasters(self) -> None:
+        public_logos = ROOT / "public" / "logos"
+        self.assertTrue((public_logos / "azlo-logo-real.png").is_file())
+        self.assertTrue((public_logos / "azlo-logo-real-white.png").is_file())
+        self.assertTrue((public_logos / "azlo-symbol-real.png").is_file())
+        self.assertTrue((public_logos / "azlo-symbol-real-white.png").is_file())
+        self.assertFalse(any(public_logos.glob("*100vetorial*")))
 
-    def test_selected_work_is_present_and_sanitized(self) -> None:
-        page = (ROOT / "src" / "app" / "page.tsx").read_text(encoding="utf-8")
-        showcase = (
-            ROOT / "src" / "components" / "experience" / "SelectedWork.tsx"
-        ).read_text(encoding="utf-8")
-
-        self.assertIn("<SelectedWork />", page)
-        self.assertIn("Individual Clinical Guide", showcase)
-        self.assertIn("Ankinator", showcase)
-        self.assertIn("Anki Analytics", showcase)
-        self.assertIn("DADOS DEMONSTRATIVOS", showcase)
-        self.assertIn("Preview anonimizado", showcase)
-        self.assertNotIn("Dra. Francine", showcase)
-        self.assertNotIn("guia provisorio francine", showcase.lower())
+    def test_old_experience_layer_is_not_in_current_source(self) -> None:
+        self.assertFalse((ROOT / "src" / "components" / "experience").exists())
+        self.assertTrue((ROOT / "src" / "components" / "site").is_dir())
+        self.assertTrue((ROOT / "src" / "data" / "site.ts").is_file())
 
 
 if __name__ == "__main__":

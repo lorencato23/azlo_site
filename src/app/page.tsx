@@ -1,27 +1,70 @@
-import { Domains } from "@/components/experience/Domains";
-import { ExperienceContact } from "@/components/experience/ExperienceContact";
-import { ExperienceFooter } from "@/components/experience/ExperienceFooter";
-import { ExperienceHero } from "@/components/experience/ExperienceHero";
-import { ExperienceNav } from "@/components/experience/ExperienceNav";
-import { InMotion } from "@/components/experience/InMotion";
-import { Principles } from "@/components/experience/Principles";
-import { Process } from "@/components/experience/Process";
-import { SelectedWork } from "@/components/experience/SelectedWork";
+import Link from "next/link";
+import { ArrowRightIcon, ArrowUpRightIcon, MailIcon } from "@/components/site/Icons";
+import { ProductCard } from "@/components/site/ProductCard";
+import { products, services, featuredProjects, currentTeam, method, site, workTypeLabel } from "@/data/site";
 
 export default function Home() {
   return (
-    <>
-      <ExperienceNav />
-      <main id="main">
-        <ExperienceHero />
-        <InMotion />
-        <SelectedWork />
-        <Domains />
-        <Process />
-        <Principles />
-        <ExperienceContact />
-      </main>
-      <ExperienceFooter />
-    </>
+    <main id="main">
+      <section className="hero hero--system">
+        <div className="hero__grid" aria-hidden="true" />
+        <div className="site-frame hero__layout">
+          <div className="hero__copy">
+            <p className="eyebrow eyebrow--light"><span />AZLO · ENGENHARIA DE SISTEMAS</p>
+            <h1>Engenharia para sistemas que precisam <em>funcionar no mundo real.</em></h1>
+            <p className="hero__lead">Entramos onde processo, dados e ambiente técnico precisam voltar a trabalhar juntos.</p>
+            <div className="hero__actions"><Link className="button button--primary" href="/contato">Descrever um problema <ArrowRightIcon /></Link><Link className="button button--secondary" href="/labs">Explorar Labs <ArrowRightIcon /></Link></div>
+            <p className="hero__proof">SISTEMAS · IA · INFRAESTRUTURA · AUTOMAÇÃO</p>
+          </div>
+          <SystemTopology />
+        </div>
+      </section>
+
+      <section className="section topology-section">
+        <div className="site-frame">
+          <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />MAPA DA OPERAÇÃO</p><h2>Contexto antes de <em>ferramenta.</em></h2></div><p>Uma operação deixa sinais. A engenharia organiza contexto antes de escolher a intervenção.</p></div>
+          <div className="topology-diagram"><p className="topology-diagram__flow mono-label">OPERAÇÃO → SINAL → CONTEXTO → INTERVENÇÃO → RETORNO</p><ol className="topology-rail"><li><span>01</span><strong>OPERAÇÃO</strong><small>Pessoas, rotinas, restrições</small></li><li><span>02</span><strong>SINAIS</strong><small>Dados, falhas, atrito</small></li><li className="is-active"><span>03</span><strong>CONTEXTO</strong><small>Fluxo, acesso, prioridade</small></li><li><span>04</span><strong>INTERVENÇÃO</strong><small>IA, software, infraestrutura</small></li><li><span>05</span><strong>RETORNO</strong><small>Operação mais clara</small></li></ol></div>
+        </div>
+      </section>
+
+      <section className="section engineering-section" id="engineering">
+        <div className="site-frame">
+          <div className="section-heading section-heading--split"><div><p className="eyebrow eyebrow--light"><span />AZLO / ENGINEERING</p><h2>Confiança na <em>execução.</em></h2></div><p>Capacidade organizada por tipo de intervenção. A tecnologia entra depois do problema e permanece ligada à operação.</p></div>
+          <div className="engineering-grid">{services.map((service) => <article className="engineering-module" key={service.index}><span className="engineering-module__number">{service.index}</span><p className="mono-label">{service.module}</p><h3>{service.title}</h3><p>{service.intervention}</p><ul>{service.capabilities.map((capability) => <li key={capability}>{capability}</li>)}</ul><Link href="/servicos">Ver módulo <ArrowRightIcon /></Link></article>)}</div>
+        </div>
+      </section>
+
+      <section className="section labs-section" id="labs">
+        <div className="site-frame">
+          <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />AZLO / LABS</p><h2>Sistemas para raciocínio humano e <em>operação.</em></h2></div><p>Produtos e sistemas experimentais para conhecimento, agentes, aprendizado e infraestrutura, desenvolvidos dentro da AZLO.</p></div>
+          <div className="labs-grid">{products.map((product) => <ProductCard key={product.slug} product={product} featured={product.slug === "mnemusa"} />)}</div>
+          <p className="labs-grid__hint mono-label">Use a faixa horizontal para explorar os sistemas <span aria-hidden="true">→</span></p>
+          <Link className="section-link" href="/labs">Abrir matriz de produtos <ArrowRightIcon /></Link>
+        </div>
+      </section>
+
+      <section className="section work-section" id="work">
+        <div className="site-frame">
+          <div className="section-heading section-heading--split"><div><p className="eyebrow eyebrow--light"><span />PROJETOS / EM DESTAQUE</p><h2>Prova técnica em <em>estágios visíveis.</em></h2></div><Link className="text-link text-link--light" href="/projetos">Ver todos os projetos <ArrowRightIcon /></Link></div>
+          <div className="selected-work">{featuredProjects.map((project) => <article key={project.slug}><div><span className="mono-label">{workTypeLabel(project.workType)}</span><h3>{project.title}</h3><p>{project.summary}</p></div><Link className="icon-link" href={`/projetos/${project.slug}`} aria-label={`Abrir ${project.title}`}><ArrowRightIcon /></Link></article>)}</div>
+        </div>
+      </section>
+
+      <section className="section method-section">
+        <div className="site-frame">
+          <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />MÉTODO</p><h2>Entender. Desenhar. Construir. <em>Operar.</em></h2></div><p>A sequência reduz incerteza sem separar arquitetura, manutenção e responsabilidade.</p></div>
+          <ol className="method-rail">{method.map((item) => <li key={item.number}><span>{item.number} / {item.label}</span><h3>{item.title}</h3><p>{item.text}</p></li>)}</ol>
+          <Link className="section-link" href="/sobre">Conhecer método e equipe <ArrowRightIcon /></Link>
+        </div>
+      </section>
+
+      <section className="people-strip" id="company"><div className="site-frame people-strip__layout"><div><p className="eyebrow"><span />EQUIPE</p><h2>Pessoas próximas do <em>problema.</em></h2></div><div><p>Quem projeta participa da responsabilidade por manter o sistema compreensível, operável e rastreável.</p><ul>{currentTeam.map((member) => <li key={member.name}><b>{member.name}</b><span>{member.role}</span></li>)}</ul><Link className="text-link" href="/sobre#team">Conhecer equipe <ArrowRightIcon /></Link></div></div></section>
+
+      <section className="contact-band"><div className="site-frame contact-band__layout"><div><p className="eyebrow eyebrow--light"><span />CONTATO / CONTEXTO</p><h2>Tem uma operação que precisa voltar a fluir?</h2></div><div><p>Descreva o sistema, a fricção e o resultado que precisa acontecer.</p><a className="contact-band__email" href={`mailto:${site.email}?subject=Conversa%20com%20a%20AZLO`}><MailIcon /><span>Descrever um problema</span><ArrowUpRightIcon /></a><small>Abre seu cliente de e-mail. Não envie dados clínicos identificáveis, credenciais ou tokens.</small></div></div></section>
+    </main>
   );
+}
+
+function SystemTopology() {
+  return <div className="system-topology" role="img" aria-label="Esquema conceitual ligando operação, contexto, conhecimento, agentes e infraestrutura; não representa telemetria"><div className="system-topology__header"><span className="mono-label">ESQUEMA CONCEITUAL</span></div><svg viewBox="0 0 520 390" aria-hidden="true"><path d="M65 80 235 195 65 310M235 195 445 80M235 195 445 310M65 80 445 80M65 310 445 310" /><circle cx="65" cy="80" r="5" /><circle cx="235" cy="195" r="7" /><circle cx="445" cy="80" r="5" /><circle cx="445" cy="310" r="5" /><circle cx="65" cy="310" r="5" /></svg><div className="system-topology__labels"><span style={{ top: "15%", left: "4%" }}>OPERAÇÃO</span><span style={{ top: "45%", left: "39%" }}>CONTEXTO</span><span style={{ top: "15%", right: "0" }}>CONHECIMENTO</span><span style={{ bottom: "15%", right: "0" }}>AGENTES</span><span style={{ bottom: "15%", left: "4%" }}>INFRAESTRUTURA</span></div><div className="system-topology__footer"><span>MAPA CONCEITUAL · SEM TELEMETRIA</span><span>SINAL / CONTEXTO / AÇÃO</span></div></div>;
 }

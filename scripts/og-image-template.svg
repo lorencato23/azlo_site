@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">AZLO — Engenharia de sistemas</title>
+  <desc id="desc">Engenharia de sistemas para operações reais. Engineering + Labs.</desc>
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#72c7e8" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#050b12"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <path d="M72 235H1128" stroke="#72c7e8" stroke-opacity=".32"/>
+  <image href="data:image/png;base64,__AZLO_SYMBOL_PNG__" x="76" y="68" width="112" height="112" preserveAspectRatio="xMidYMid meet"/>
+  <text x="222" y="139" fill="#ecf4f7" font-family="Arial, Helvetica, sans-serif" font-size="60" font-weight="700" letter-spacing="12">AZLO</text>
+  <text x="1124" y="116" fill="#b9e7f5" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="2">ENGINEERING + LABS</text>
+  <text x="76" y="342" fill="#ecf4f7" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="600" letter-spacing="-1">Engenharia de sistemas</text>
+  <text x="76" y="414" fill="#ecf4f7" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="600" letter-spacing="-1">para operações reais.</text>
+  <text x="78" y="485" fill="#a7b8c2" font-family="Arial, Helvetica, sans-serif" font-size="26">IA · software · infraestrutura · automação</text>
+  <text x="1124" y="574" fill="#72c7e8" text-anchor="end" font-family="monospace" font-size="19" letter-spacing="1">AZLO.COM.BR</text>
+</svg>

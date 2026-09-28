@@ -7,7 +7,8 @@
  *
  * Uso: npm run generate-assets  (a partir de azlo-site/)
  */
-import sharp from "sharp";
+import { spawnSync } from "node:child_process";
+import { readFile, writeFile } from "node:fs/promises";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -16,57 +17,50 @@ const publicDir = join(__dirname, "..", "public");
 const logosDir = join(publicDir, "logos");
 
 const NAVY = "#052B57";
+const sharpModule = await import("sharp").catch(() => null);
+const sharp = sharpModule?.default;
+
+async function renderSvg(svg, outputPath, size) {
+  if (sharp) {
+    const image = sharp(Buffer.from(svg));
+    if (size) image.resize(size, size, { fit: "fill" });
+    await image.png().toFile(outputPath);
+    return;
+  }
+
+  const args = ["svg:-"];
+  if (size) args.push("-resize", `${size}x${size}!`);
+  args.push("png:-");
+  const result = spawnSync("magick", args, { input: Buffer.from(svg) });
+  if (result.error || result.status !== 0) {
+    throw new Error(`Falha ao renderizar ${outputPath} com sharp ou ImageMagick: ${result.error?.message ?? result.stderr.toString()}`);
+  }
+  await writeFile(outputPath, result.stdout);
+}
 
 // ---------- Favicons: símbolo real branco sobre quadrado navy arredondado ----------
-const BASE = 512;
-const roundedSquare = Buffer.from(
-  `<svg width="${BASE}" height="${BASE}" xmlns="http://www.w3.org/2000/svg">
-     <rect width="${BASE}" height="${BASE}" rx="96" fill="${NAVY}"/>
-   </svg>`
-);
-
-const symbol = await sharp(join(logosDir, "azlo-symbol-real-white.png"))
-  .resize(352, 352, { fit: "inside" })
-  .toBuffer();
-
-const faviconBase = await sharp(roundedSquare)
-  .composite([{ input: symbol, gravity: "center" }])
-  .png()
-  .toBuffer();
+const symbol = await readFile(join(logosDir, "azlo-symbol-real-white.png"));
+const symbolData = `data:image/png;base64,${symbol.toString("base64")}`;
+const faviconSvg = `<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><rect width="512" height="512" rx="96" fill="${NAVY}"/><image href="${symbolData}" x="80" y="78" width="352" height="356" preserveAspectRatio="xMidYMid meet"/></svg>`;
 
 for (const [file, px] of [
   ["favicon-32x32.png", 32],
   ["favicon-16x16.png", 16],
   ["apple-touch-icon.png", 180],
 ]) {
-  await sharp(faviconBase).resize(px, px).png().toFile(join(publicDir, file));
+  await renderSvg(faviconSvg, join(publicDir, file), px);
   console.log(`✓ public/${file}`);
 }
 
-// ---------- OG image: assinatura real branca sobre navy com brilho e tagline ----------
-const ogBg = Buffer.from(
-  `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-     <defs>
-       <radialGradient id="glow" cx="82%" cy="8%" r="75%">
-         <stop offset="0%" stop-color="#0A5E9C" stop-opacity="0.6"/>
-         <stop offset="100%" stop-color="${NAVY}" stop-opacity="0"/>
-       </radialGradient>
-     </defs>
-     <rect width="1200" height="630" fill="${NAVY}"/>
-     <rect width="1200" height="630" fill="url(#glow)"/>
-     <text x="600" y="556" font-family="Georgia, 'Times New Roman', serif"
-           font-size="32" fill="#8FD8E4" text-anchor="middle">
-       Ideias que ganham forma.
-     </text>
-   </svg>`
+// ---------- OG image: peça 1200×630 com a marca aprovada sem redesenho ----------
+const ogTemplate = await readFile(join(__dirname, "og-image-template.svg"), "utf8");
+const ogSvg = ogTemplate.replace(
+  "__AZLO_SYMBOL_PNG__",
+  symbol.toString("base64"),
 );
+if (ogSvg === ogTemplate || ogSvg.includes("__AZLO_SYMBOL_PNG__")) {
+  throw new Error("Não foi possível inserir o símbolo aprovado no template Open Graph.");
+}
 
-const logo = await sharp(join(logosDir, "azlo-logo-real-white.png"))
-  .resize({ width: 640 })
-  .toBuffer();
-
-await sharp(ogBg)
-  .composite([{ input: logo, top: 165, left: 280 }])
-  .png()
-  .toFile(join(publicDir, "og-image.png"));
+await renderSvg(ogSvg, join(publicDir, "og-image.png"));
 console.log("✓ public/og-image.png");
