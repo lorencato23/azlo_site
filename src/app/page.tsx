@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRightIcon, ArrowUpRightIcon, MailIcon } from "@/components/site/Icons";
 import { ProductCard } from "@/components/site/ProductCard";
-import { products, services, featuredProjects, currentTeam, method, site, workTypeLabel } from "@/data/site";
+import { products, services, featuredProjects, currentTeam, founder, method, site, workTypeLabel } from "@/data/site";
 
 export default function Home() {
   return (
@@ -10,33 +10,19 @@ export default function Home() {
         <div className="hero__grid" aria-hidden="true" />
         <div className="site-frame hero__layout">
           <div className="hero__copy">
-            <p className="eyebrow eyebrow--light"><span />AZLO · ENGENHARIA DE SISTEMAS</p>
-            <h1>Engenharia para sistemas que precisam <em>funcionar no mundo real.</em></h1>
-            <p className="hero__lead">Entramos onde processo, dados e ambiente técnico precisam voltar a trabalhar juntos.</p>
-            <div className="hero__actions"><Link className="button button--primary" href="/contato">Descrever um problema <ArrowRightIcon /></Link><Link className="button button--secondary" href="/labs">Explorar Labs <ArrowRightIcon /></Link></div>
-            <p className="hero__proof">SISTEMAS · IA · INFRAESTRUTURA · AUTOMAÇÃO</p>
+            <p className="eyebrow eyebrow--light"><span />AZLO · LABORATÓRIO INDEPENDENTE</p>
+            <h1>Laboratório independente de sistemas, IA e <em>infraestrutura.</em></h1>
+            <p className="hero__lead">Produtos próprios para conhecimento, agentes, aprendizagem e operação, projetados por um médico que constrói sistemas. Também disponível para consultoria sob demanda.</p>
+            <div className="hero__actions"><Link className="button button--primary" href="/labs">Explorar Labs <ArrowRightIcon /></Link><Link className="button button--secondary" href="/contato">Conversar sobre um projeto <ArrowRightIcon /></Link></div>
+            <p className="hero__proof">LABS · PROJETOS · CONSULTORIA SOB DEMANDA</p>
           </div>
           <SystemTopology />
         </div>
       </section>
 
-      <section className="section topology-section">
-        <div className="site-frame">
-          <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />MAPA DA OPERAÇÃO</p><h2>Contexto antes de <em>ferramenta.</em></h2></div><p>Uma operação deixa sinais. A engenharia organiza contexto antes de escolher a intervenção.</p></div>
-          <div className="topology-diagram"><p className="topology-diagram__flow mono-label">OPERAÇÃO → SINAL → CONTEXTO → INTERVENÇÃO → RETORNO</p><ol className="topology-rail"><li><span>01</span><strong>OPERAÇÃO</strong><small>Pessoas, rotinas, restrições</small></li><li><span>02</span><strong>SINAIS</strong><small>Dados, falhas, atrito</small></li><li className="is-active"><span>03</span><strong>CONTEXTO</strong><small>Fluxo, acesso, prioridade</small></li><li><span>04</span><strong>INTERVENÇÃO</strong><small>IA, software, infraestrutura</small></li><li><span>05</span><strong>RETORNO</strong><small>Operação mais clara</small></li></ol></div>
-        </div>
-      </section>
-
-      <section className="section engineering-section" id="engineering">
-        <div className="site-frame">
-          <div className="section-heading section-heading--split"><div><p className="eyebrow eyebrow--light"><span />AZLO / ENGINEERING</p><h2>Confiança na <em>execução.</em></h2></div><p>Capacidade organizada por tipo de intervenção. A tecnologia entra depois do problema e permanece ligada à operação.</p></div>
-          <div className="engineering-grid">{services.map((service) => <article className="engineering-module" key={service.index}><span className="engineering-module__number">{service.index}</span><p className="mono-label">{service.module}</p><h3>{service.title}</h3><p>{service.intervention}</p><ul>{service.capabilities.map((capability) => <li key={capability}>{capability}</li>)}</ul><Link href="/servicos">Ver módulo <ArrowRightIcon /></Link></article>)}</div>
-        </div>
-      </section>
-
       <section className="section labs-section" id="labs">
         <div className="site-frame">
-          <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />AZLO / LABS</p><h2>Sistemas para raciocínio humano e <em>operação.</em></h2></div><p>Produtos e sistemas experimentais para conhecimento, agentes, aprendizado e infraestrutura, desenvolvidos dentro da AZLO.</p></div>
+          <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />AZLO / LABS</p><h2>O que está sendo <em>construído.</em></h2></div><p>Sistemas próprios em estágios diferentes, do conceito à beta fechada. Cada um indica o que você pode fazer com ele hoje.</p></div>
           <div className="labs-grid">{products.map((product) => <ProductCard key={product.slug} product={product} featured={product.slug === "mnemusa"} />)}</div>
           <p className="labs-grid__hint mono-label">Use a faixa horizontal para explorar os sistemas <span aria-hidden="true">→</span></p>
           <Link className="section-link" href="/labs">Abrir matriz de produtos <ArrowRightIcon /></Link>
@@ -50,6 +36,22 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="people-strip" id="company"><div className="site-frame people-strip__layout"><div><p className="eyebrow"><span />QUEM ESTÁ POR TRÁS</p><h2>Um fundador, <em>colaboradores próximos.</em></h2></div><div>{founder ? <p><b>{founder.name}</b> — {founder.bio}</p> : null}<ul>{currentTeam.map((member) => <li key={member.name}><b>{member.name}</b><span>{member.group === "founder" ? "Fundador" : `Colaborador · ${member.role}`}</span></li>)}</ul><Link className="text-link" href="/sobre#team">Conhecer a equipe <ArrowRightIcon /></Link></div></div></section>
+
+      <section className="section topology-section">
+        <div className="site-frame">
+          <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />MAPA DA OPERAÇÃO</p><h2>Contexto antes de <em>ferramenta.</em></h2></div><p>Nos produtos e na consultoria, o ponto de partida é o mesmo: entender a operação antes de escolher a tecnologia.</p></div>
+          <div className="topology-diagram"><p className="topology-diagram__flow mono-label">OPERAÇÃO → SINAL → CONTEXTO → INTERVENÇÃO → RETORNO</p><ol className="topology-rail"><li><span>01</span><strong>OPERAÇÃO</strong><small>Pessoas, rotinas, restrições</small></li><li><span>02</span><strong>SINAIS</strong><small>Dados, falhas, atrito</small></li><li className="is-active"><span>03</span><strong>CONTEXTO</strong><small>Fluxo, acesso, prioridade</small></li><li><span>04</span><strong>INTERVENÇÃO</strong><small>IA, software, infraestrutura</small></li><li><span>05</span><strong>RETORNO</strong><small>Operação mais clara</small></li></ol></div>
+        </div>
+      </section>
+
+      <section className="section engineering-section" id="consultoria">
+        <div className="site-frame">
+          <div className="section-heading section-heading--split"><div><p className="eyebrow eyebrow--light"><span />AZLO / CONSULTORIA</p><h2>Consultoria sob <em>demanda.</em></h2></div><p>Além dos Labs, a AZLO aceita projetos pontuais nas mesmas áreas em que constrói: sistemas de saúde, IA, infraestrutura e automação.</p></div>
+          <div className="engineering-grid">{services.map((service) => <article className="engineering-module" key={service.index}><span className="engineering-module__number">{service.index}</span><p className="mono-label">{service.module}</p><h3>{service.title}</h3><p>{service.intervention}</p><ul>{service.capabilities.map((capability) => <li key={capability}>{capability}</li>)}</ul><Link href="/servicos">Ver área <ArrowRightIcon /></Link></article>)}</div>
+        </div>
+      </section>
+
       <section className="section method-section">
         <div className="site-frame">
           <div className="section-heading section-heading--split"><div><p className="eyebrow"><span />MÉTODO</p><h2>Entender. Desenhar. Construir. <em>Operar.</em></h2></div><p>A sequência reduz incerteza sem separar arquitetura, manutenção e responsabilidade.</p></div>
@@ -58,9 +60,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="people-strip" id="company"><div className="site-frame people-strip__layout"><div><p className="eyebrow"><span />EQUIPE</p><h2>Pessoas próximas do <em>problema.</em></h2></div><div><p>Quem projeta participa da responsabilidade por manter o sistema compreensível, operável e rastreável.</p><ul>{currentTeam.map((member) => <li key={member.name}><b>{member.name}</b><span>{member.role}</span></li>)}</ul><Link className="text-link" href="/sobre#team">Conhecer equipe <ArrowRightIcon /></Link></div></div></section>
-
-      <section className="contact-band"><div className="site-frame contact-band__layout"><div><p className="eyebrow eyebrow--light"><span />CONTATO / CONTEXTO</p><h2>Tem uma operação que precisa voltar a fluir?</h2></div><div><p>Descreva o sistema, a fricção e o resultado que precisa acontecer.</p><a className="contact-band__email" href={`mailto:${site.email}?subject=Conversa%20com%20a%20AZLO`}><MailIcon /><span>Descrever um problema</span><ArrowUpRightIcon /></a><small>Abre seu cliente de e-mail. Não envie dados clínicos identificáveis, credenciais ou tokens.</small></div></div></section>
+      <section className="contact-band"><div className="site-frame contact-band__layout"><div><p className="eyebrow eyebrow--light"><span />CONTATO</p><h2>Gostou de um projeto ou tem um problema parecido?</h2></div><div><p>Conte o contexto: interesse em um produto dos Labs, uma colaboração ou uma consultoria pontual.</p><a className="contact-band__email" href={`mailto:${site.email}?subject=Conversa%20com%20a%20AZLO`}><MailIcon /><span>Escrever para a AZLO</span><ArrowUpRightIcon /></a><small>Abre seu cliente de e-mail. Não envie dados clínicos identificáveis, credenciais ou tokens.</small></div></div></section>
     </main>
   );
 }

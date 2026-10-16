@@ -328,6 +328,7 @@ h1 em, h2 em, h3 em { color: var(--accent); font-style: normal; }
 .team-card__photo span { position: relative; z-index: 1; display: grid; width: 4.3rem; height: 4.3rem; border: 1px solid var(--accent); color: var(--accent-soft); font-size: 1.25rem; place-items: center; }
 
 .team-card__identity { padding-top: 1.2rem; }
+.team-card__identity .team-card__bio { margin-top: 0.6rem; color: var(--text-secondary); font-family: inherit; font-size: 0.86rem; letter-spacing: 0; text-transform: none; line-height: 1.5; }
 .team-card__identity p { color: var(--accent); font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .team-card__identity h3 { margin-top: 0.55rem; font-size: 1.6rem; line-height: 1; }
 .team-card__identity strong { display: block; margin-top: 0.6rem; color: var(--text-secondary); font-size: 0.78rem; }

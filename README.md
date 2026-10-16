@@ -1,11 +1,12 @@
 # AZLO
 
-Site institucional da AZLO: engenharia de sistemas, IA, software, infraestrutura e automação para operações reais; Labs reúne produtos próprios e pesquisa.
+Site da AZLO, laboratório independente de sistemas, IA e infraestrutura: Labs reúne produtos próprios e pesquisa; a consultoria sob demanda aparece como opção secundária.
 
 ## Arquitetura de marca
 
-- **AZLO / ENGINEERING** — sistemas clínicos, IA integrada, infraestrutura & dados e automação.
-- **AZLO / LABS** — MNEMUSA, THOTH, LOGOS, ODIN, ANUBIS, HERMES e ATLAS.
+- **AZLO / LABS** — frente principal: MNEMUSA, THOTH, LOGOS, ODIN, ANUBIS, HERMES e ATLAS. Cada produto declara em `engagement` o que o visitante pode fazer hoje.
+- **AZLO / CONSULTORIA** — sob demanda, em `/servicos/`: sistemas de saúde, IA, infraestrutura & dados e automação.
+- Equipe: fundador em destaque (`group: "founder"`) e colaboradores (`group: "collaborator"`).
 - Produtos permanecem subordinados à marca AZLO; páginas públicas usam assinaturas como `AZLO / LABS / MNEMUSA`.
 
 ## Stack
@@ -28,8 +29,8 @@ docs/audits/           # registros locais de estado e decisões de reforma
 
 ## Páginas públicas
 
-- `/` — posicionamento, topologia, Engenharia, Labs, Projetos, método, equipe e contato
-- `/servicos/` — módulos AZLO / Engineering
+- `/` — posicionamento, Labs, Projetos, quem está por trás, topologia, Consultoria, método e contato
+- `/servicos/` — áreas de consultoria sob demanda
 - `/labs/` — matriz de produtos próprios e sistemas experimentais
 - `/labs/<slug>/` — template reutilizável de produto
 - `/projetos/` — projetos com filtros de Produto, Engenharia, P&D e Código aberto

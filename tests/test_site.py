@@ -128,14 +128,18 @@ class PublicSiteTests(unittest.TestCase):
 
     def test_social_preview_uses_current_positioning(self) -> None:
         og_source = (ROOT / "scripts" / "og-image-template.svg").read_text(encoding="utf-8")
-        self.assertIn("Engenharia de sistemas", og_source)
-        self.assertIn("Engineering + Labs", og_source)
+        self.assertIn("Laboratório independente", og_source)
+        self.assertIn("LABS + CONSULTORIA", og_source)
         self.assertNotIn("Ideias que ganham forma", og_source)
         self.assertIn("og-image.png", self.layout)
 
     def test_second_pass_keeps_semantic_architecture_and_contact_flow(self) -> None:
         self.assertIn('href="/contato"', self.home)
-        self.assertIn("Descrever um problema", self.home)
+        self.assertIn("Conversar sobre um projeto", self.home)
+        self.assertIn("LABORATÓRIO INDEPENDENTE", self.home)
+        self.assertIn("Consultoria sob", self.home)
+        self.assertIn("engagement:", self.data)
+        self.assertIn('group: "founder"', self.data)
         self.assertIn("OPERAÇÃO → SINAL → CONTEXTO → INTERVENÇÃO → RETORNO", self.home)
         for field in ("name=\"name\"", "name=\"organization\"", "name=\"email\"", "name=\"current\"", "name=\"friction\"", "name=\"outcome\"", "name=\"stack\""):
             self.assertIn(field, self.problem_form)

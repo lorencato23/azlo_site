@@ -22,6 +22,7 @@ export function ProductCard({ product, featured = false }: ProductCardProps) {
         <span><b>ESTADO</b>{productStatusLabel(product.status)}</span>
         {product.version ? <span><b>VERSÃO</b>{product.version}</span> : null}
         {product.distribution ? <span><b>DISTRIBUIÇÃO</b>{product.distribution === "OPEN SOURCE" ? "CÓDIGO ABERTO" : product.distribution}</span> : null}
+        <span><b>PARA VOCÊ</b>{product.engagement.label}</span>
       </div>
       <Link className="product-card__link" href={`/labs/${product.slug}`}>
         Explorar sistema <ArrowRightIcon />

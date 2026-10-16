@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navigation, products, site } from "@/data/site";
+import { products, site } from "@/data/site";
 
 export function SiteFooter() {
   return (
@@ -10,11 +10,11 @@ export function SiteFooter() {
             <img src="/logos/azlo-symbol-real-white.png" width="350" height="355" alt="" />
             <span>AZLO</span>
           </Link>
-          <p>ENGENHARIA PARA SISTEMAS QUE PRECISAM OPERAR.</p>
+          <p>LABORATÓRIO INDEPENDENTE DE SISTEMAS, IA E INFRAESTRUTURA.</p>
           <strong>Inteligência exige infraestrutura.</strong>
         </div>
         <div className="site-footer__column">
-          <p className="mono-label">ENGENHARIA</p>
+          <p className="mono-label">CONSULTORIA</p>
           <Link href="/servicos">Sistemas & saúde</Link>
           <Link href="/servicos">IA & conhecimento</Link>
           <Link href="/servicos">Infraestrutura & dados</Link>
@@ -26,7 +26,8 @@ export function SiteFooter() {
         </div>
         <div className="site-footer__column">
           <p className="mono-label">AZLO</p>
-          {navigation.slice(2).map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+          <Link href="/projetos">Projetos</Link>
+          <Link href="/sobre">Sobre e método</Link>
           <Link href="/sobre#team">Equipe</Link>
           <a className="site-footer__email" href={`mailto:${site.email}?subject=Conversa%20com%20a%20AZLO`}>{site.email}</a>
         </div>

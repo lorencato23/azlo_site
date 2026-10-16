@@ -8,9 +8,10 @@ export function TeamCard({ member }: { member: TeamMember }) {
         <span>{member.initials}</span>
       </div>
       <div className="team-card__identity">
-        <p>Equipe atual</p>
+        <p>{member.group === "founder" ? "Fundador" : "Colaborador"}</p>
         <h3>{member.name}</h3>
         <strong>{member.role}</strong>
+        {member.bio ? <p className="team-card__bio">{member.bio}</p> : null}
       </div>
       <ul className="team-card__expertise" aria-label={`Especialidades de ${member.name}`}>
         {member.expertise.map((item) => <li key={item}>{item}</li>)}

@@ -1,7 +1,7 @@
 {
   "name": "AZLO",
   "short_name": "AZLO",
-  "description": "Engenharia de sistemas, IA, software e infraestrutura para operações reais.",
+  "description": "Laboratório independente de sistemas, IA e infraestrutura, com consultoria sob demanda.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#050B12",

@@ -51,6 +51,7 @@ export type LabProduct = {
   currentState?: { version: string; label: string }[];
   roadmap?: string[];
   related: ProductSlug[];
+  engagement: { label: string; text: string };
 };
 
 export type TeamMember = {
@@ -59,20 +60,22 @@ export type TeamMember = {
   expertise: string[];
   initials: string;
   linkedin?: string;
+  group: "founder" | "collaborator";
+  bio?: string;
 };
 
 export const site = {
   name: "AZLO",
-  description: "Engenharia de sistemas, IA, software e infraestrutura para operações reais.",
+  description: "Laboratório independente de sistemas, IA e infraestrutura, com consultoria sob demanda.",
   email: "contato@azlo.com.br",
   url: "https://azlo.com.br",
 };
 
 export const navigation = [
-  { href: "/servicos", label: "Engenharia", shortLabel: "Engenharia" },
   { href: "/labs", label: "Labs", shortLabel: "Labs" },
   { href: "/projetos", label: "Projetos", shortLabel: "Projetos" },
-  { href: "/sobre#method", label: "Método", shortLabel: "Método" },
+  { href: "/servicos", label: "Consultoria", shortLabel: "Consultoria" },
+  { href: "/sobre", label: "Sobre", shortLabel: "Sobre" },
 ];
 
 export const services: Service[] = [
@@ -130,6 +133,7 @@ export const products: LabProduct[] = [
     currentState: [{ version: "v0.10.0", label: "ALPHA · ROADMAP PRINCIPAL CONCLUÍDO" }],
     roadmap: ["v0.10.0 conclui o roadmap principal", "Próximas decisões seguem pendentes; não são escopo aprovado"],
     related: ["hermes", "thoth", "atlas"],
+    engagement: { label: "CONVERSAR", text: "Aberto a conversas sobre arquitetura e uso experimental. Ainda sem licença definida; não use com dados reais." },
   },
   {
     slug: "thoth",
@@ -143,6 +147,7 @@ export const products: LabProduct[] = [
     system: "Thoth trabalha na camada de preparação e curadoria, mantendo a revisão humana como fronteira de publicação.",
     architecture: ["Pipelines de geração e edição", "Curadoria e auditoria", "Pré-pesagem editorial", "Revisão humana antes da publicação"],
     related: ["logos", "odin", "mnemusa"],
+    engagement: { label: "ACOMPANHAR", text: "Em estruturação. Acompanhe a evolução ou converse sobre curadoria de material educacional." },
   },
   {
     slug: "logos",
@@ -156,6 +161,7 @@ export const products: LabProduct[] = [
     system: "A plataforma conecta sessão, feedback, rating e próxima seleção. A vertical pública atual é apresentada como Logos / Med.",
     architecture: ["Sessões de prática", "Feedback e rating", "Seleção adaptativa", "Vertical Logos / Med"],
     related: ["thoth", "hermes"],
+    engagement: { label: "PEDIR ACESSO", text: "Beta fechada. Peça acesso para testar a vertical Logos / Med." },
   },
   {
     slug: "odin",
@@ -169,6 +175,7 @@ export const products: LabProduct[] = [
     system: "Odin organiza o caminho de pesquisa e recuperação; nomes técnicos como odin-cli e odin-core permanecem internos quando necessários.",
     architecture: ["Aquisição por DOI", "Camadas de recuperação", "Proveniência de fontes", "Fallback manual documentado"],
     related: ["thoth", "mnemusa"],
+    engagement: { label: "ACOMPANHAR", text: "Em incubação. Aberto a conversas sobre recuperação de literatura e pesquisa." },
   },
   {
     slug: "anubis",
@@ -182,6 +189,7 @@ export const products: LabProduct[] = [
     system: "Anubis é uma definição de sistema em estágio conceitual nesta superfície pública; não representa um produto operacional já disponível.",
     architecture: ["Inventário de artefatos", "Reconciliação de estado", "Preservação de rollback", "Modernização por etapas"],
     related: ["atlas", "hermes"],
+    engagement: { label: "ACOMPANHAR", text: "Conceito. Ainda não há versão disponível para uso." },
   },
   {
     slug: "hermes",
@@ -196,6 +204,7 @@ export const products: LabProduct[] = [
     system: "Hermes conecta interfaces, documentos e agentes com atenção à autorização, rastreabilidade e operação local quando aplicável.",
     architecture: ["Integração entre agentes", "Comunicação e documentos", "Interfaces operacionais", "Contribuições open source documentadas"],
     related: ["mnemusa", "atlas", "logos"],
+    engagement: { label: "COLABORAR", text: "Código aberto. Conversas técnicas e contribuições são bem-vindas." },
   },
   {
     slug: "atlas",
@@ -209,6 +218,7 @@ export const products: LabProduct[] = [
     system: "Atlas organiza investigação e operação assistida, mantendo ações limitadas, aprovação e rechecagem como fronteiras do sistema.",
     architecture: ["Sinais de Linux", "Fatos, hipóteses e linha do tempo", "Ações assistidas com aprovação", "Auditoria local"],
     related: ["anubis", "hermes", "mnemusa"],
+    engagement: { label: "CONVERSAR", text: "Em P&D. Aberto a conversas técnicas; ainda não há versão disponível para uso." },
   },
 ];
 
@@ -287,10 +297,12 @@ export const projects: Project[] = [
 export const currentTeam: TeamMember[] = [
   {
     name: "Gabriel Lorençato",
-    role: "Projetista",
-    expertise: ["Engenharia de Eficiência", "Otimização de Sistemas", "Medicina"],
+    role: "Fundador · médico e projetista de sistemas",
+    expertise: ["Medicina", "Engenharia de Eficiência", "Otimização de Sistemas"],
     initials: "GL",
     linkedin: "https://www.linkedin.com/in/gabriel-lorencato-593b44218",
+    group: "founder",
+    bio: "Médico. Concebe, projeta e constrói a maior parte dos sistemas da AZLO, do produto à infraestrutura.",
   },
   {
     name: "Karson Godinho",
@@ -298,6 +310,7 @@ export const currentTeam: TeamMember[] = [
     expertise: ["Engenharia de Dados", "Cybersegurança", "Banco Vetorial"],
     initials: "KG",
     linkedin: "https://www.linkedin.com/in/karson-godinho-6b88981b6",
+    group: "collaborator",
   },
   {
     name: "Alan Lima",
@@ -305,6 +318,7 @@ export const currentTeam: TeamMember[] = [
     expertise: ["PostgreSQL", "Oracle", "MongoDB", "Cloud"],
     initials: "AL",
     linkedin: "https://www.linkedin.com/in/alan-lima-7568451a5",
+    group: "collaborator",
   },
 ];
 
@@ -314,6 +328,9 @@ export const method = [
   { number: "03", title: "Construir", label: "CONSTRUIR", text: "Integrar e validar uma intervenção que caiba no ambiente real." },
   { number: "04", title: "Operar", label: "OPERAR", text: "Observar, documentar e evoluir com quem mantém o sistema." },
 ];
+
+export const founder = currentTeam.find((member) => member.group === "founder");
+export const collaborators = currentTeam.filter((member) => member.group === "collaborator");
 
 export const featuredProjects = projects.filter((project) => project.featured);
 export const caseStudyProjects = projects.filter((project) => project.caseStudy);

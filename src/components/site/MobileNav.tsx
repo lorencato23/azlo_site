@@ -49,7 +49,7 @@ export function MobileNav() {
           const active = base === "/" ? pathname === "/" : pathname.startsWith(base);
           return <Link key={item.href} href={item.href} ref={index === 0 ? firstLinkRef : undefined} onClick={closeMenu} className={active ? "is-active" : undefined} aria-current={active ? "page" : undefined}><span>0{index + 1}</span>{item.label}</Link>;
         })}
-        <Link className="mobile-nav__cta" href="/contato" onClick={closeMenu}>Descrever um problema</Link>
+        <Link className="mobile-nav__cta" href="/contato" onClick={closeMenu}>Conversar sobre um projeto</Link>
         <a href={`mailto:${site.email}?subject=Conversa%20com%20a%20AZLO`}><MailIcon /> {site.email}</a>
       </nav>
     </details>

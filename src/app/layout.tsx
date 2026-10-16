@@ -19,21 +19,21 @@ const hanken = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: "AZLO | Engenharia para operações reais", template: "%s | AZLO" },
+  title: { default: "AZLO | Laboratório independente de sistemas e IA", template: "%s | AZLO" },
   description: site.description,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: "AZLO | Engenharia para operações reais",
+    title: "AZLO | Laboratório independente de sistemas e IA",
     description: site.description,
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "AZLO — engenharia de sistemas para operações reais." }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "AZLO — laboratório independente de sistemas, IA e infraestrutura." }],
     locale: "pt_BR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AZLO | Engenharia para operações reais",
+    title: "AZLO | Laboratório independente de sistemas e IA",
     description: site.description,
     images: ["/og-image.png"],
   },

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getProduct, productStatusLabel, type LabProduct } from "@/data/site";
+import { getProduct, productStatusLabel, site, type LabProduct } from "@/data/site";
 import { ArrowRightIcon } from "./Icons";
 import { Sigil } from "./Sigil";
 
@@ -22,6 +22,7 @@ export function ProductTemplate({ product }: { product: LabProduct }) {
             {product.version ? <span><b>VERSÃO</b>{product.version}</span> : null}
             {product.distribution ? <span><b>DISTRIBUIÇÃO</b>{product.distribution === "OPEN SOURCE" ? "CÓDIGO ABERTO" : product.distribution}</span> : null}
             <span><b>FRENTE</b>AZLO / LABS</span>
+            <span><b>PARA VOCÊ · {product.engagement.label}</b>{product.engagement.text} <a href={`mailto:${site.email}?subject=${encodeURIComponent(`Interesse em ${product.name}`)}`}>Falar sobre {product.name}</a></span>
           </aside>
         </div>
       </section>

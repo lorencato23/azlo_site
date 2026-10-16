@@ -23,7 +23,7 @@ export function SiteHeader() {
           })}
         </nav>
         <Link className="header-contact" href="/contato">
-          Descrever um problema <ArrowUpRightIcon />
+          Conversar sobre um projeto <ArrowUpRightIcon />
         </Link>
         <MobileNav />
       </div>
