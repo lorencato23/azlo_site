@@ -1,6 +1,9 @@
 # Status — AZLO site
 
-State: ACTIVE — CONSOLIDAÇÃO ENGINEERING / LABS EM VALIDAÇÃO E PUBLICAÇÃO
+**Estado:** em produção em azlo.com.br; o commit mais recente (2026-10-16) reposiciona a AZLO como laboratório independente com consultoria sob demanda
+**Versão:** sem versão (sem tags; o package.json mantém o 0.1.0 do modelo inicial)
+**Atualizado em:** 2026-10-17
+**Próximo passo:** a definir
 
 ## Objetivo
 

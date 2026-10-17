@@ -5,3 +5,4 @@
 - Comandos: `npm run dev`, `npm run lint`, `npm run build`.
 - `node_modules/`, `.next/` e `out/` são gerados; não os edite manualmente.
 - Execute lint antes de concluir alterações de código. Build somente quando necessário, pois gera artefatos.
+- Ao terminar uma tarefa, atualize o cabeçalho do STATUS.md (Estado, Versão, Atualizado em, Próximo passo) no mesmo commit ou PR. Formato: docs/PROJETOS.md do Mnemusa.
