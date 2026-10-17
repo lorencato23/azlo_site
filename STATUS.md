@@ -1,6 +1,9 @@
 # Status — AZLO site
 
-State: ACTIVE — CONSOLIDAÇÃO ENGINEERING / LABS EM VALIDAÇÃO E PUBLICAÇÃO
+**Estado:** em produção em azlo.com.br; o commit mais recente (2026-10-16) reposiciona a AZLO como laboratório independente com consultoria sob demanda
+**Versão:** sem versão
+**Atualizado em:** 2026-10-17
+**Próximo passo:** a definir
 
 ## Objetivo
 
@@ -31,6 +34,10 @@ Transformar o site institucional da AZLO em uma organização de engenharia com 
 - Rotas públicas, canonical, sitemap, robots, headers e console foram verificados.
 - O deployment publicado correspondeu ao conteúdo novo; o fetch externo com navegação antiga foi classificado como snapshot/cache anterior, não como ausência de SSR.
 - O HTML entregue contém o conteúdo essencial sem depender de interação client-side.
+
+## Versionamento
+
+O repositório não tem tags de versão; o `package.json` mantém o valor do modelo inicial do Next.js, que não reflete entregas.
 
 ## Validação local
 
